@@ -21,7 +21,7 @@ public class Inicio {
 		metod.addElement(new Canciones("/Caratula2.jpg","Dile","Don Omar"));
 		metod.addElement(new Canciones("/Caratula3.jpg","Cuando hablan las miradas","Guayacan"));
 		metod.addElement(new Canciones("/Caratula4.jpg","Hotaru No Hikari","Ikimono-Gakari"));
-		JOptionPane.showConfirmDialog(null, "no vuelva a dañar el programa");
+		
 		
 
 		//reproducir("recursos/Lindsey.mp3");
