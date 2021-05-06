@@ -17,12 +17,12 @@ public class Inicio {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		metod.addElement(new Canciones("/Caratula1.jpg","Another one bites the dust","Queen"));
-		metod.addElement(new Canciones("/Caratula2.jpg","Dile","Don Omar"));
-		metod.addElement(new Canciones("/Caratula3.jpg","Cuando hablan las miradas","Guayacan"));
-		metod.addElement(new Canciones("/Caratula4.jpg","Hotaru No Hikari","Ikimono-Gakari"));
+		metod.addElement(new Canciones("/Caratula1.jpg","Another one bites the dust","Queen","recursos/Queen-Another.mp3"));
+		metod.addElement(new Canciones("/Caratula2.jpg","Dile","Don Omar","recursos/Dile.mp3"));
+		metod.addElement(new Canciones("/Caratula3.jpg","Cuando hablan las miradas","Guayacan","recursos/Cuando.mp3"));
+		metod.addElement(new Canciones("/Caratula4.jpg","Hotaru No Hikari","Ikimono-Gakari","recursos/naruto.mp3"));
 		
-		
+		 
 
 		//reproducir("recursos/Lindsey.mp3");
 		Portada ventana = new Portada();

@@ -110,6 +110,13 @@ public class Menu extends JFrame {
 					nodo = nodo.getAnterior();
 					Caratula();
 					mostrarDatos();
+					try {
+						sd.loadFile(nodo.getInformacion().getCancion());
+					} catch (BasicPlayerException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					sd.play();
 				}	
 			}
 		});
@@ -123,6 +130,13 @@ public class Menu extends JFrame {
 					nodo = nodo.getSiguiente();
 					Caratula();
 					mostrarDatos();
+					try {
+						sd.loadFile(nodo.getInformacion().getCancion());
+					} catch (BasicPlayerException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					sd.play();
 				}	
 			}
 		});
@@ -165,7 +179,7 @@ public class Menu extends JFrame {
                
 				if(sd.estado() == false ){
 					try {
-						sd.loadFile("recursos/Lindsey.mp3");
+						sd.loadFile(nodo.getInformacion().getCancion());
 						sd.play();
 							
 					} catch (BasicPlayerException a) {
@@ -174,7 +188,7 @@ public class Menu extends JFrame {
 					}
 				}else {
 					try {
-						sd.loadFile("recursos/Lindsey.mp3"); 
+						sd.loadFile(nodo.getInformacion().getCancion()); 
 						sd.pausa();
 						
 					} catch (BasicPlayerException a) {
@@ -225,11 +239,11 @@ public class Menu extends JFrame {
 			}
 			
 		});
-		slider.setMaximum(5);
+		slider.setMaximum(10);
 		
 		slider.setMajorTickSpacing(1);
 		slider.setPaintLabels(true);
-		slider.setValue(0);
+		slider.setValue(5);
 		
 		JPanel Menu = new JPanel();
 		Menu.setBackground(new Color(51, 51, 51));

@@ -3,13 +3,14 @@ package objeto;
 public class Canciones {
 	
 		
-	private String caratula, nombre, artista;
+	private String caratula, nombre, artista, cancion;
 
-	public Canciones(String caratula, String nombre, String artista) {
+	public Canciones(String caratula, String nombre, String artista, String cancion) {
 			super();
 			this.caratula = caratula;
 			this.nombre = nombre;
 			this.artista = artista;
+			this.cancion = cancion;
 		}
 
 	public String getCaratula() {
@@ -35,5 +36,14 @@ public class Canciones {
 	public void setArtista(String artista) {
 		this.artista = artista;
 	}
+
+	public String getCancion() {
+		return cancion;
+	}
+
+	public void setCancion(String cancion) {
+		this.cancion = cancion;
+	}
+	
 
 }
