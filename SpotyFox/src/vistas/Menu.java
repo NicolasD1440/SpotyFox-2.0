@@ -25,6 +25,7 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Map;
+import javax.swing.JSlider;
 
 public class Menu extends JFrame {
 
@@ -48,7 +49,7 @@ public class Menu extends JFrame {
 	private final JPanel Lista = new JPanel();
 	private final JLabel lblNewLabel = new JLabel("Favoritas");
 	Sound sd = new Sound();
-	
+	JSlider slider = new JSlider();
 
 	private static Nodo nodo;
 	private final JLabel lblPausa = new JLabel("New label");
@@ -91,6 +92,7 @@ public class Menu extends JFrame {
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblNewLabel_3.setBounds(10, 11, 455, 30);
 		Musica.add(lblNewLabel_3);
+	
 		lblCaratula.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCaratula.setBounds(109, 52, 251, 156);
 		
@@ -154,6 +156,7 @@ public class Menu extends JFrame {
 		lblAnterior.setBounds(221, 11, 30, 28);
 		Reproductor.add(lblAnterior);
 		
+		
 		lblSiguiente.setBounds(338, 11, 30, 28);
 		Reproductor.add(lblSiguiente);
 		lblPlay.addMouseListener(new MouseAdapter() {
@@ -164,7 +167,7 @@ public class Menu extends JFrame {
 					try {
 						sd.loadFile("recursos/Lindsey.mp3");
 						sd.play();
-						sd.volumen();
+							
 					} catch (BasicPlayerException a) {
 						// TODO Auto-generated catch block
 						a.printStackTrace();
@@ -202,6 +205,31 @@ public class Menu extends JFrame {
 		lblPausa.setBounds(301, 11, 30, 28);
 		
 		Reproductor.add(lblPausa);
+		slider.setBackground(Color.GRAY);
+		slider.setForeground(Color.BLACK);
+		slider.setBounds(404, 1, 200, 26);
+		Reproductor.add(slider);
+		slider.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {	
+				double a = slider.getValue() * 1.0;
+						try {
+							sd.volumen(a/10);
+						} catch (BasicPlayerException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+			}
+			
+		});
+		slider.setMaximum(5);
+		
+		slider.setMajorTickSpacing(1);
+		slider.setPaintLabels(true);
+		slider.setValue(0);
 		
 		JPanel Menu = new JPanel();
 		Menu.setBackground(new Color(51, 51, 51));
@@ -231,6 +259,7 @@ public class Menu extends JFrame {
 		setLocationRelativeTo(null);
 		Caratula();
 		Botones();
+		mostrarDatos();
 	}
 	
 	private void Botones() {
@@ -284,5 +313,5 @@ public class Menu extends JFrame {
  	      lblAutor.setText(nodo.getInformacion().getArtista());
  	     
    }
-
+    
 }

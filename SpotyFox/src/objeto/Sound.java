@@ -44,7 +44,7 @@ public class Sound {
 	 public void seguir() throws BasicPlayerException {
 		 basicPlayer.resume();
 	 }
-	 public void volumen() throws BasicPlayerException {
-		  basicPlayer.setGain(0.1);
+	 public void volumen(double a) throws BasicPlayerException {
+		  basicPlayer.setGain(a);
 	 }
 }
