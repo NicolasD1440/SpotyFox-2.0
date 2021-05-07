@@ -24,12 +24,15 @@ import java.awt.Image;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Map;
 import javax.swing.JSlider;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JProgressBar;
 
-public class Menu extends JFrame {
+public class Menu extends JFrame  {
 
 	private JPanel contentPane;
 	JLabel lblPlay = new JLabel("<P>");
@@ -45,12 +48,15 @@ public class Menu extends JFrame {
 	JButton btnLista = new JButton("New button");
 	JButton btnHome = new JButton("New button");
 	Sound sd = new Sound();
-	JSlider slider = new JSlider();
 
+	
+	JSlider slider = new JSlider();
+	JProgressBar progreso = new JProgressBar();
+    int TamanoEnBytes;
 	private static Nodo nodo;
 	private final JLabel lblPausa = new JLabel("New label");
 	private final JButton btnFavorito = new JButton("F");
-	
+    
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -69,7 +75,7 @@ public class Menu extends JFrame {
 	 */
 	public Menu(Nodo first) {
 		this.nodo = first;
-		
+	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 650, 420);
 		contentPane = new JPanel();
@@ -109,17 +115,12 @@ public class Menu extends JFrame {
 		slider.setForeground(new Color(0, 102, 204));
 		slider.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-			@Override
 			public void mouseReleased(MouseEvent e) {	
 				double a = slider.getValue() * 1.0;
-						try {
-							sd.volumen(a/10);
-						} catch (BasicPlayerException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
+			
+			
+					sd.CambiarVolumen(a/10);
+				
 			}
 			
 		});
@@ -146,6 +147,10 @@ public class Menu extends JFrame {
 			lblCaratula.setBounds(72, 52, 293, 180);
 			
 			Musica.add(lblCaratula);
+			
+			
+			progreso.setBounds(10, 284, 455, 14);
+			Musica.add(progreso);
 		Lista.setBackground(new Color(51, 51, 51));
 		Lista.setBounds(149, 11, 475, 298);
 		
@@ -165,27 +170,27 @@ public class Menu extends JFrame {
 		lblPlay.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-               
-				if(sd.estado() == false ){
-					try {
-						sd.loadFile(nodo.getInformacion().getCancion());
-						sd.play();
-							
-					} catch (BasicPlayerException a) {
-						// TODO Auto-generated catch block
-						a.printStackTrace();
-					}
-				}else {
-					try {
-						sd.loadFile(nodo.getInformacion().getCancion()); 
-						sd.pausa();
-						
-					} catch (BasicPlayerException a) {
-						// TODO Auto-generated catch block
-						a.printStackTrace();
-					}
+				sd.Balance(0.9f);
 				
+			
+			   if (sd.Estado() == 0) {
+				sd.Pausar();
+			}else {
+				try {
+					sd.Reproducir(nodo.getInformacion().getCancion());
+				} catch (BasicPlayerException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
+			}
+				
+           /*  if(sd.BIS == null) {
+            	 sd.Play(nodo.getInformacion().getCancion());
+             }else {
+            	 sd.Stop();
+            	 sd.BIS = null;
+             }*/
+		
 			}
 		});
 		
@@ -194,15 +199,8 @@ public class Menu extends JFrame {
 		lblPausa.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(sd.estado() == false ){
-					try {
-						sd.seguir();
-					} catch (BasicPlayerException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
-				
+				//sd.Stop();
+				sd.Pausar();
 			}		
 		});
 		lblPausa.setBounds(301, 11, 30, 29);
@@ -219,14 +217,13 @@ public class Menu extends JFrame {
 					nodo = nodo.getSiguiente();
 					Caratula();
 					mostrarDatos();
-					try {
-						sd.loadFile(nodo.getInformacion().getCancion());
-					} catch (BasicPlayerException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					sd.play();
-				}	
+					sd.Parar();
+					/*if(sd.BIS !=null) {
+					sd.Pause();
+					sd.BIS = null;
+					}*/
+					
+				}
 			}
 		});
 		lblAnteriorC.addMouseListener(new MouseAdapter() {
@@ -236,14 +233,12 @@ public class Menu extends JFrame {
 					nodo = nodo.getAnterior();
 					Caratula();
 					mostrarDatos();
-					try {
-						sd.loadFile(nodo.getInformacion().getCancion());
-					} catch (BasicPlayerException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					sd.play();
-				}	
+					sd.Parar();
+					/*if(sd.BIS !=null) {
+						sd.Pause();
+						sd.BIS = null;
+						}*/
+				}
 			}
 		});
 		
@@ -274,6 +269,8 @@ public class Menu extends JFrame {
 		Caratula();
 		Botones();
 		mostrarDatos();
+		opacidad();
+		
 	}
 	
 	private void Botones() {
@@ -320,4 +317,18 @@ public class Menu extends JFrame {
  	      lblAutor.setText(nodo.getInformacion().getArtista());//Cantante
  	     
    }
+    public void opacidad() {
+
+		btnHome.setOpaque(false);
+		btnHome.setContentAreaFilled(false);
+		btnHome.setBorderPainted(false);
+		
+		btnLista.setOpaque(false);
+		btnLista.setContentAreaFilled(false);
+		btnLista.setBorderPainted(false);
+    }
+
+
+
+	
 }
