@@ -114,30 +114,8 @@ public class Sound {
 	    public void ObternerDatos(String ruta) throws BasicPlayerException{
 	    	player.open(new File(ruta));
 	    }
-	    public void tamaño( String path) throws IOException { 
-	    	FIS = new FileInputStream(path);
-	        songtotalLength = FIS.available();	
-	      
-	    }
-	    public void ObternerDatos(){
-	        File mp3Archivo = new File(RutaAbsoluta);
-	        AudioFileFormat baseFileFormat = null;
-	        try {
-	            baseFileFormat = AudioSystem.getAudioFileFormat(mp3Archivo);
-	        } catch (UnsupportedAudioFileException | IOException ex) {
-	            Logger.getLogger(Sound.class.getName()).log(Level.SEVERE, null, ex);
-	        }
-	        if(baseFileFormat instanceof TAudioFileFormat){
-	            Map properties = ((TAudioFileFormat)baseFileFormat).properties();
-	            Titulo=(String)properties.get("title");
-	            Artista=(String)properties.get("author");
-	            Album=(String)properties.get("album");
-	            Ano=(String)properties.get("date");
-	            Comentario=(String)properties.get("comment");
-	            Copyright=(String)properties.get("copyright");
-	            Duracion=(long)properties.get("duration")/1000000;
-	        }
-	    }
+	    
+	   
 	  
 
 

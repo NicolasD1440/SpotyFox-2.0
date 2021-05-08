@@ -4,13 +4,15 @@ public class Canciones {
 	
 		
 	private String caratula, nombre, artista, cancion;
+	private double tiempo;
 
-	public Canciones(String caratula, String nombre, String artista, String cancion) {
+	public Canciones(String caratula, String nombre, String artista, String cancion, double tiempo) {
 			super();
 			this.caratula = caratula;
 			this.nombre = nombre;
 			this.artista = artista;
 			this.cancion = cancion;
+			this.tiempo = tiempo;
 		}
 
 	public String getCaratula() {
@@ -44,6 +46,15 @@ public class Canciones {
 	public void setCancion(String cancion) {
 		this.cancion = cancion;
 	}
+
+	public double getTiempo() {
+		return tiempo;
+	}
+
+	public void setTiempo(int tiempo) {
+		this.tiempo = tiempo;
+	}
+	
 	
 
 }

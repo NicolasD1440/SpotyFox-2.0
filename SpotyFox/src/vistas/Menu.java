@@ -27,6 +27,9 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.swing.JSlider;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -48,14 +51,16 @@ public class Menu extends JFrame  {
 	JButton btnLista = new JButton("New button");
 	JButton btnHome = new JButton("New button");
 	Sound sd = new Sound();
-
 	
 	JSlider slider = new JSlider();
+	Timer timer = new Timer();
 	JProgressBar progreso = new JProgressBar();
     int TamanoEnBytes;
 	private static Nodo nodo;
 	private final JLabel lblPausa = new JLabel("New label");
 	private final JButton btnFavorito = new JButton("F");
+	private JPanel Menu;
+	private final JLabel lblTime = new JLabel("New label");
     
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -75,6 +80,9 @@ public class Menu extends JFrame  {
 	 */
 	public Menu(Nodo first) {
 		this.nodo = first;
+	  	
+
+    
 	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 650, 420);
@@ -147,10 +155,15 @@ public class Menu extends JFrame  {
 			lblCaratula.setBounds(72, 52, 293, 180);
 			
 			Musica.add(lblCaratula);
+			progreso.setMaximum(400);
 			
 			
-			progreso.setBounds(10, 284, 455, 14);
+			progreso.setBounds(61, 287, 404, 8);
 			Musica.add(progreso);
+			lblTime.setForeground(Color.WHITE);
+			lblTime.setBounds(10, 281, 46, 14);
+			
+			Musica.add(lblTime);
 		Lista.setBackground(new Color(51, 51, 51));
 		Lista.setBounds(149, 11, 475, 298);
 		
@@ -170,14 +183,19 @@ public class Menu extends JFrame  {
 		lblPlay.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				sd.Balance(0.9f);
-				
-			
+			    timer.purge();
+				progreso.setValue(0);
+			 progreso.setMaximum(0);
+			    
 			   if (sd.Estado() == 0) {
 				sd.Pausar();
 			}else {
+				
+				
 				try {
-					sd.Reproducir(nodo.getInformacion().getCancion());
+					sd.Reproducir(nodo.getInformacion().getCancion()); 
+					tiempo();
+				    incremento();
 				} catch (BasicPlayerException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -201,6 +219,10 @@ public class Menu extends JFrame  {
 			public void mouseClicked(MouseEvent e) {
 				//sd.Stop();
 				sd.Pausar();
+				//timer.cancel();
+				timer.purge();	
+				progreso.setValue(0);
+			    progreso.repaint();
 			}		
 		});
 		lblPausa.setBounds(301, 11, 30, 29);
@@ -217,12 +239,11 @@ public class Menu extends JFrame  {
 					nodo = nodo.getSiguiente();
 					Caratula();
 					mostrarDatos();
-					sd.Parar();
-					/*if(sd.BIS !=null) {
-					sd.Pause();
-					sd.BIS = null;
-					}*/
-					
+					sd.Pausar();
+					timer.purge();	
+					progreso.setValue(0);
+				    progreso.repaint();
+				    
 				}
 			}
 		});
@@ -233,16 +254,16 @@ public class Menu extends JFrame  {
 					nodo = nodo.getAnterior();
 					Caratula();
 					mostrarDatos();
-					sd.Parar();
-					/*if(sd.BIS !=null) {
-						sd.Pause();
-						sd.BIS = null;
-						}*/
+					sd.Pausar();
+					timer.purge();	
+					progreso.setValue(0);
+				    progreso.repaint();
+				    
 				}
 			}
 		});
 		
-		JPanel Menu = new JPanel();
+		Menu = new JPanel();
 		Menu.setBackground(new Color(51, 51, 51));
 		Menu.setBounds(10, 11, 129, 298);
 		contentPane.add(Menu);
@@ -271,6 +292,8 @@ public class Menu extends JFrame  {
 		mostrarDatos();
 		opacidad();
 		
+	   // incremento();
+
 	}
 	
 	private void Botones() {
@@ -315,6 +338,7 @@ public class Menu extends JFrame  {
     	//datos de las canciones
  	      lblNombre.setText(nodo.getInformacion().getNombre());//nombre de la cancion
  	      lblAutor.setText(nodo.getInformacion().getArtista());//Cantante
+ 	     lblTime.setText(String.valueOf(nodo.getInformacion().getTiempo()));//tiempo de la cancion
  	     
    }
     public void opacidad() {
@@ -327,8 +351,52 @@ public class Menu extends JFrame  {
 		btnLista.setContentAreaFilled(false);
 		btnLista.setBorderPainted(false);
     }
+    public void incremento() {
+    	int con = (int) (nodo.getInformacion().getTiempo()*59);
+        progreso.setMaximum(con);
+        
+    	TimerTask tarea = new TimerTask() {
+			 int x = 0;
 
+			@Override
+			public void run() {
+				if(x<=con && sd.Estado() == 0){
+			    x++;
+				progreso.setValue(x);
+				}else if(sd.Estado()==1) {
+					cancel();
+				}
+				
+				
+				
+			}
+			 
+		};
+		 timer.schedule(tarea, 0,1000);
+    
+    }
+    public void tiempo() {
+    	TimerTask tarea = new TimerTask() {
+			 double x = nodo.getInformacion().getTiempo();
 
-
-	
+			@Override
+			public void run() {
+				if(x>=0){
+			    x -= 0.01;
+			    lblTime.setText(String.valueOf(Math.round(x*100.0)/100.0));
+				
+				}else if(sd.Estado()==1) {
+					cancel();
+				}else{
+					 lblTime.setText("0:00");
+				}
+				
+				
+				
+			}
+			 
+		};
+		 timer.schedule(tarea, 0,592);
+    	
+    }
 }
