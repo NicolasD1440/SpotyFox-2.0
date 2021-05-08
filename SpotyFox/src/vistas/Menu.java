@@ -202,12 +202,7 @@ public class Menu extends JFrame  {
 				}
 			}
 				
-           /*  if(sd.BIS == null) {
-            	 sd.Play(nodo.getInformacion().getCancion());
-             }else {
-            	 sd.Stop();
-            	 sd.BIS = null;
-             }*/
+          
 		
 			}
 		});
@@ -243,7 +238,7 @@ public class Menu extends JFrame  {
 					timer.purge();	
 					progreso.setValue(0);
 				    progreso.repaint();
-				    
+				 //   lblTime.setText("0");
 				}
 			}
 		});
@@ -376,19 +371,17 @@ public class Menu extends JFrame  {
     
     }
     public void tiempo() {
-    	TimerTask tarea = new TimerTask() {
-			 double x = nodo.getInformacion().getTiempo();
-
+    	TimerTask tarea1 = new TimerTask() {
+			 double n = nodo.getInformacion().getTiempo();
+             double x = 0;
 			@Override
 			public void run() {
-				if(x>=0){
-			    x -= 0.01;
+				if(x<=n && sd.Estado() ==0){
+			    x += 0.01;
 			    lblTime.setText(String.valueOf(Math.round(x*100.0)/100.0));
 				
 				}else if(sd.Estado()==1) {
 					cancel();
-				}else{
-					 lblTime.setText("0:00");
 				}
 				
 				
@@ -396,7 +389,7 @@ public class Menu extends JFrame  {
 			}
 			 
 		};
-		 timer.schedule(tarea, 0,592);
+		 timer.schedule(tarea1, 0,592);
     	
     }
 }
