@@ -7,12 +7,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import cola.ColaSimple;
 import inicio.Inicio;
 import javazoom.jlgui.basicplayer.BasicController;
 import javazoom.jlgui.basicplayer.BasicPlayerEvent;
 import javazoom.jlgui.basicplayer.BasicPlayerException;
 import javazoom.jlgui.basicplayer.BasicPlayerListener;
 import listas.Nodo;
+import objeto.Canciones;
+import objeto.CancionesFa;
 import objeto.Sound;
 
 import javax.swing.ImageIcon;
@@ -34,6 +37,8 @@ import javax.swing.JSlider;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JProgressBar;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 public class Menu extends JFrame  {
 
@@ -41,6 +46,7 @@ public class Menu extends JFrame  {
 	JLabel lblPlay = new JLabel("<P>");
 	private JPanel Musica;
 	private JPanel Reproductor;
+	JList<String> list = new JList<String>();
 	private final JLabel lblCaratula = new JLabel("");
 	private final JLabel lblNombre = new JLabel("Nombre de la cancion");
 	private final JLabel lblAutor = new JLabel("AUTOR");
@@ -48,8 +54,7 @@ public class Menu extends JFrame  {
 	private final JLabel lblSiguienteC = new JLabel("New label");
 	private final JPanel Lista = new JPanel();
 	private final JLabel lblNewLabel = new JLabel("Favoritas");
-	JButton btnLista = new JButton("New button");
-	JButton btnHome = new JButton("New button");
+	JLabel lblFavorita = new JLabel("F");
 	Sound sd = new Sound();
 	
 	JSlider slider = new JSlider();
@@ -58,9 +63,12 @@ public class Menu extends JFrame  {
     int TamanoEnBytes;
 	private static Nodo nodo;
 	private final JLabel lblPausa = new JLabel("New label");
-	private final JButton btnFavorito = new JButton("F");
 	private JPanel Menu;
 	private final JLabel lblTime = new JLabel("New label");
+	private final JLabel lblHome = new JLabel("New label");
+	private final JLabel lblLista = new JLabel("New label");
+    ColaSimple cola = new ColaSimple();
+    private final JLabel lblBasura = new JLabel("Borrar");
     
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -79,11 +87,7 @@ public class Menu extends JFrame  {
 	 * Create the frame.
 	 */
 	public Menu(Nodo first) {
-		this.nodo = first;
-	  	
-
-    
-	
+		this.nodo = first;	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 650, 420);
 		contentPane = new JPanel();
@@ -143,27 +147,30 @@ public class Menu extends JFrame  {
 		lblNewLabel_3_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_3_1.setBounds(415, 32, 44, 30);
 		Musica.add(lblNewLabel_3_1);
-		btnFavorito.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		progreso.setMaximum(400);
+		
+		
+		progreso.setBounds(61, 287, 404, 8);
+		Musica.add(progreso);
+		lblTime.setForeground(Color.WHITE);
+		lblTime.setBounds(10, 281, 46, 14);
+		
+		Musica.add(lblTime);
+		lblFavorita.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				cola.encolar(new CancionesFa(lblNombre.getText()));
 			}
 		});
-		btnFavorito.setBounds(335, 52, 30, 29);
 		
-		Musica.add(btnFavorito);
+		lblFavorita.setBounds(335, 52, 30, 30);
+		Musica.add(lblFavorita);
 		
 			lblCaratula.setHorizontalAlignment(SwingConstants.CENTER);
 			lblCaratula.setBounds(72, 52, 293, 180);
 			
 			Musica.add(lblCaratula);
-			progreso.setMaximum(400);
-			
-			
-			progreso.setBounds(61, 287, 404, 8);
-			Musica.add(progreso);
-			lblTime.setForeground(Color.WHITE);
-			lblTime.setBounds(10, 281, 46, 14);
-			
-			Musica.add(lblTime);
 		Lista.setBackground(new Color(51, 51, 51));
 		Lista.setBounds(149, 11, 475, 298);
 		
@@ -174,6 +181,18 @@ public class Menu extends JFrame  {
 		lblNewLabel.setBounds(10, 11, 455, 30);
 		
 		Lista.add(lblNewLabel);
+		list.setValueIsAdjusting(true);
+		list.setBackground(new Color(51, 51, 51));
+		list.setForeground(new Color(255, 255, 255));
+		list.setFont(new Font("Tahoma", Font.BOLD, 20));
+		
+		list.setBounds(20, 52, 428, 190);
+		Lista.add(list);
+		lblBasura.setForeground(Color.WHITE);
+		lblBasura.setHorizontalAlignment(SwingConstants.LEFT);
+		lblBasura.setBounds(171, 257, 140, 30);
+		
+		Lista.add(lblBasura);
 		
 		Reproductor = new JPanel();
 		Reproductor.setBackground(new Color(51, 51, 51));
@@ -263,29 +282,31 @@ public class Menu extends JFrame  {
 		Menu.setBounds(10, 11, 129, 298);
 		contentPane.add(Menu);
 		Menu.setLayout(null);
-		
-		btnHome.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		lblHome.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 				Musica.setVisible(true);
 				Lista.setVisible(false);
 			}
 		});
-		btnHome.setBounds(10, 11, 109, 23);
-		Menu.add(btnHome);
+		lblHome.setBounds(10, 11, 109, 32);
 		
-		btnLista.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		Menu.add(lblHome);
+		lblLista.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 				Musica.setVisible(false);
 				Lista.setVisible(true);
+				list.setModel(cola.mostrarDatos());
 			}
 		});
-		btnLista.setBounds(10, 45, 109, 23);
-		Menu.add(btnLista);
+		lblLista.setBounds(10, 54, 109, 32);
+		
+		Menu.add(lblLista);
 		setLocationRelativeTo(null);
 		Caratula();
 		Botones();
 		mostrarDatos();
-		opacidad();
 		
 	   // incremento();
 
@@ -295,12 +316,12 @@ public class Menu extends JFrame  {
 		
 		//imagenes de Menu
 		Image home = new ImageIcon(this.getClass().getResource("/Home.png"))
-				.getImage().getScaledInstance(btnHome.getWidth(), btnHome.getHeight(),Image.SCALE_DEFAULT);
-			btnHome.setIcon(new ImageIcon(home));
+				.getImage().getScaledInstance(lblHome.getWidth(), lblHome.getHeight(),Image.SCALE_DEFAULT);
+			lblHome.setIcon(new ImageIcon(home));
 				
 		Image lista = new ImageIcon(this.getClass().getResource("/Lista.png"))
-				.getImage().getScaledInstance(btnLista.getWidth(), btnLista.getHeight(),Image.SCALE_DEFAULT);
-			btnLista.setIcon(new ImageIcon(lista));
+				.getImage().getScaledInstance(lblLista.getWidth(), lblLista.getHeight(),Image.SCALE_DEFAULT);
+			lblLista.setIcon(new ImageIcon(lista));
 			
 		//imagenes de Reproductor
 		Image play = new ImageIcon(this.getClass().getResource("/Play.png"))
@@ -315,9 +336,17 @@ public class Menu extends JFrame  {
 				.getImage().getScaledInstance(lblSiguienteC.getWidth(), lblSiguienteC.getHeight(),Image.SCALE_DEFAULT);
 			lblSiguienteC.setIcon(new ImageIcon(siguienteC));
 			
-			Image pause = new ImageIcon(this.getClass().getResource("/Pause.png"))
+		Image pause = new ImageIcon(this.getClass().getResource("/Pause.png"))
 				.getImage().getScaledInstance(lblSiguienteC.getWidth(), lblSiguienteC.getHeight(),Image.SCALE_DEFAULT);
 			lblPausa.setIcon(new ImageIcon(pause));
+			
+		Image Favorita = new ImageIcon(this.getClass().getResource("/Favorita.png"))
+				.getImage().getScaledInstance(lblFavorita.getWidth(), lblFavorita.getHeight(),Image.SCALE_DEFAULT);
+			lblFavorita.setIcon(new ImageIcon(Favorita));
+			
+		Image Basura = new ImageIcon(this.getClass().getResource("/Eliminar.png"))
+				.getImage().getScaledInstance(lblBasura.getWidth(), lblBasura.getHeight(),Image.SCALE_DEFAULT);
+			lblBasura.setIcon(new ImageIcon(Basura));
 	}
 	
 	public void Caratula() {
@@ -336,16 +365,7 @@ public class Menu extends JFrame  {
  	     lblTime.setText(String.valueOf(nodo.getInformacion().getTiempo()));//tiempo de la cancion
  	     
    }
-    public void opacidad() {
-
-		btnHome.setOpaque(false);
-		btnHome.setContentAreaFilled(false);
-		btnHome.setBorderPainted(false);
-		
-		btnLista.setOpaque(false);
-		btnLista.setContentAreaFilled(false);
-		btnLista.setBorderPainted(false);
-    }
+  
     public void incremento() {
     	int con = (int) (nodo.getInformacion().getTiempo()*59);
         progreso.setMaximum(con);
