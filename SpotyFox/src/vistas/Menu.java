@@ -18,6 +18,7 @@ import objeto.Canciones;
 import objeto.CancionesFa;
 import objeto.Sound;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -160,6 +161,7 @@ public class Menu extends JFrame  {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+				JOptionPane.showMessageDialog(null, "Agregada a favoritos");
 				cola.encolar(new CancionesFa(lblNombre.getText()));
 			}
 		});
@@ -188,6 +190,12 @@ public class Menu extends JFrame  {
 		
 		list.setBounds(20, 52, 428, 190);
 		Lista.add(list);
+		lblBasura.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				cola.eliminardato(list);
+			}
+		});
 		lblBasura.setForeground(Color.WHITE);
 		lblBasura.setHorizontalAlignment(SwingConstants.LEFT);
 		lblBasura.setBounds(171, 257, 140, 30);
@@ -412,4 +420,5 @@ public class Menu extends JFrame  {
 		 timer.schedule(tarea1, 0,592);
     	
     }
+  
 }

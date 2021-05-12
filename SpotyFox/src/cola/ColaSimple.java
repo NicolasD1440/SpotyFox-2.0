@@ -1,6 +1,9 @@
 package cola;
 
+import java.awt.List;
+
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import objeto.CancionesFa;
@@ -72,4 +75,9 @@ public class ColaSimple {
 		return primero;
 		
 	}
+	  public DefaultListModel<String> eliminardato(JList<String> list) {
+	    	DefaultListModel<String> modelo = (DefaultListModel<String>) list.getModel();
+	    	modelo.remove(list.getSelectedIndex());
+	    	return modelo;
+	    }
 }
