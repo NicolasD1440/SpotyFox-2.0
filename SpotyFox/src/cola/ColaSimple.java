@@ -39,6 +39,7 @@ public class ColaSimple {
 			this.primero = nodo;
 			//Si la cola esta vacia se agrega el elemento al Inicio
 		}else {
+					
 			this.ultimo.setReferencia(nodo);
 			//Si la cola cuenta con un elemento entonces se agrega al final
 		}
