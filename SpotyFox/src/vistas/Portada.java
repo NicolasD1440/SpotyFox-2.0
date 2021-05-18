@@ -65,10 +65,10 @@ public class Portada extends JFrame {
 		
 		lblBarras.setBounds(0, 115, 534, 109);
 		contentPane.add(lblBarras);
-		progressBar.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 204, 0), new Color(255, 153, 0), new Color(255, 102, 0), new Color(255, 51, 0)));
+		progressBar.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 153, 255), new Color(0, 153, 255), new Color(0, 153, 255), new Color(0, 153, 255)));
 		
 		progressBar.setStringPainted(true);
-		progressBar.setForeground(new Color(255, 165, 0));
+		progressBar.setForeground(new Color(51, 0, 204));
 		progressBar.setBounds(30, 253, 474, 25);
 		contentPane.add(progressBar);
 		setLocationRelativeTo(null);

@@ -3,10 +3,10 @@ package cola;
 
 import objeto.CancionesFa;
 
-public class Nodo {
+public class Nodo1 {
 
 	private CancionesFa informacion;//Aqui se cambia por el objeto
-	private Nodo referencia;// Variable para enlazar los nodos.
+	private Nodo1 referencia;// Variable para enlazar los nodos.
 
 	//Respectivos get y set de los atributos
 	public CancionesFa getInformacion() {
@@ -15,10 +15,10 @@ public class Nodo {
 	public void setInformacion(CancionesFa informacion) {
 		this.informacion = informacion;
 	}
-	public Nodo getReferencia() {
+	public Nodo1 getReferencia() {
 		return referencia;
 	}
-	public void setReferencia(Nodo referencia) {
+	public void setReferencia(Nodo1 referencia) {
 		this.referencia = referencia;
 	}
 }

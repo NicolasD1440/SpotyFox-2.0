@@ -11,8 +11,8 @@ import objeto.CancionesFa;
 public class ColaSimple {
 
 	 //Elementos de la cola
-	private Nodo primero; //El acceso al nodo
-	private Nodo ultimo; 
+	private Nodo1 primero; //El acceso al nodo
+	private Nodo1 ultimo; 
 	private int tam;//Tamaño de la lista
 	
 	//constructor
@@ -31,7 +31,7 @@ public class ColaSimple {
 	
 	//Metodo para encolar al inicio o al final
 	public void encolar(CancionesFa v) {
-		Nodo nodo = new Nodo();
+		Nodo1 nodo = new Nodo1();
 		//Se instancia la clase nodo para permitir la interación entre las dos clases
 		nodo.setInformacion(v);
 		//Seteamos los valores que seran asignados a las variables de instancia
@@ -56,11 +56,11 @@ public class ColaSimple {
 	//Este método es el encargado de guardar los datos ingresados desde la interfaz y mostrarlos en la lista;
 	public DefaultListModel<String> mostrarDatos(){
 		
-		Nodo aux = primero;
+		Nodo1 aux = primero;
 		DefaultListModel<String> listModel = new DefaultListModel<String>();
 		if(!ColaVacia()) {
 			for(int i = 0; i < tam; i++) {
-				listModel.addElement((i+1) + ". " + aux.getInformacion().getNombre());
+				listModel.addElement(aux.getInformacion().getNombre());
 				aux = aux.getReferencia();
 			}
 			return listModel;	
@@ -72,7 +72,7 @@ public class ColaSimple {
 	}
 	//Metodo encargado de dar acceso al nodo para ser utilizado
 	//dentro de la interfaz
-	public Nodo primero() {
+	public Nodo1 primero() {
 		return primero;
 		
 	}
