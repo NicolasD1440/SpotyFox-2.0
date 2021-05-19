@@ -40,7 +40,7 @@ public class Sound {
 	    FileInputStream FIS;
 	   public long songtotalLength;
 	    public Sound(){
-	        this.Volumen = 1;
+	        this.Volumen = 0.5;
 	        player=new BasicPlayer();
 	    }
 	    

@@ -94,7 +94,8 @@ public class Menu extends JFrame  {
 	 */
 	public Menu(Nodo first) {
 		setType(Type.UTILITY);
-		this.nodo = first;	
+		this.nodo = first;
+	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 650, 420);
 		contentPane = new JPanel();
@@ -135,10 +136,10 @@ public class Menu extends JFrame  {
 		slider.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {	
-				double a = slider.getValue() * 1.0;
+				double a = (slider.getValue() * 1.0)/10;
 			
 			
-					sd.CambiarVolumen(a/10);
+					sd.CambiarVolumen(a*a);
 				
 			}
 			
@@ -193,30 +194,41 @@ public class Menu extends JFrame  {
 		lblNewLabel.setBounds(10, 11, 455, 30);
 		
 		Lista.add(lblNewLabel);
+		
 		/*list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
+				*/
 				
+		
+		list.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
 				nodo1 = cola.primero();
-				timer.purge();
-				//progreso.setValue(0);
-			// progreso.setMaximum(0);
-			    
-			   if (sd.Estado() == 0) {
+				if (nodo1.getReferencia() != null) {
+					nodo1.getReferencia();
+					if (sd.Estado() == 1) {
 				sd.Pausar();
 			}else {													//metodo de seleccion de la cancion aun no sirve
 				
 				
 				try {
 					sd.Reproducir(nodo1.getInformacion().getCancion()); 
-					tiempo();
-				    incremento();
+					
+					//tiempo();
+				    //incremento();
 				} catch (BasicPlayerException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				}
+				
+				//timer.purge();
+				//progreso.setValue(0);
+			// progreso.setMaximum(0);
+			    
+			   
 			}
 			}
-		});*/
+		});
 		list.setValueIsAdjusting(true);
 		list.setBackground(new Color(51, 51, 51));
 		list.setForeground(new Color(255, 255, 255));
@@ -347,6 +359,7 @@ public class Menu extends JFrame  {
 				timer.purge();	
 				progreso.setValue(0);
 			    progreso.repaint();
+			    lblTime.setText(String.valueOf(nodo.getInformacion().getTiempo()));
 			}
 		});
 		lblLista.setBounds(10, 54, 109, 32);

@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.swing.JOptionPane;
 
+import cola.ColaSimple;
 import javazoom.jlgui.basicplayer.BasicPlayer;
 import listas.Lista_Circular;
 import objeto.Canciones;
@@ -13,6 +14,7 @@ import vistas.Portada;
 public class Inicio {
 	
 	public static Lista_Circular metod = new Lista_Circular();
+
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
