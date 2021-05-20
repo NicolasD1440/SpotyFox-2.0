@@ -50,11 +50,11 @@ public class Sound {
 	    	ObternerDatos(ruta);
 	        try {
 	            if(player.getStatus()==1){
-	                player.resume();
+	                
 	            }else{
 	                player.play();
 	            }
-	            CambiarVolumen(Volumen);
+	            
 	            return true;
 	        } catch (BasicPlayerException ex) {
 	            return false;

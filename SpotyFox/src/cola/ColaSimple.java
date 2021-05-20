@@ -81,4 +81,21 @@ public class ColaSimple {
 	    	modelo.remove(list.getSelectedIndex());
 	    	return modelo;
 	    }
+	  public String Buscar (String a) {
+			Nodo1 var = primero;
+
+			for(int i = 0; i < tam; i++) {
+				if(a.equals(var.getInformacion().getNombre())) {
+					return var.getInformacion().getCancion();
+				}else {
+					
+					var = primero.getReferencia();
+				}
+			}
+			
+			
+			return "NOSE XD";
+		}
+		
+		
 }

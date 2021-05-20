@@ -198,37 +198,22 @@ public class Menu extends JFrame  {
 		/*list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 				*/
-				
-		
-		list.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				nodo1 = cola.primero();
-				if (nodo1.getReferencia() != null) {
-					nodo1.getReferencia();
-					if (sd.Estado() == 1) {
-				sd.Pausar();
-			}else {													//metodo de seleccion de la cancion aun no sirve
-				
-				
-				try {
-					sd.Reproducir(nodo1.getInformacion().getCancion()); 
-					
-					//tiempo();
-				    //incremento();
-				} catch (BasicPlayerException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+		list.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 1) {
+					try {
+						sd.Reproducir(cola.Buscar(list.getSelectedValue()));
+					} catch (BasicPlayerException e1) {
+						
+						e1.printStackTrace();
+					}
 				}
-				}
-				
-				//timer.purge();
-				//progreso.setValue(0);
-			// progreso.setMaximum(0);
-			    
-			   
-			}
 			}
 		});
+				
+		
+		
 		list.setValueIsAdjusting(true);
 		list.setBackground(new Color(51, 51, 51));
 		list.setForeground(new Color(255, 255, 255));
@@ -311,7 +296,7 @@ public class Menu extends JFrame  {
 					timer.purge();	
 					progreso.setValue(0);
 				    progreso.repaint();
-				 //   lblTime.setText("0");
+				    
 				}
 			}
 		});
