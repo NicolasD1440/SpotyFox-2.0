@@ -31,6 +31,12 @@ public class ColaSimple {
 	
 	//Metodo para encolar al inicio o al final
 	public void encolar(CancionesFa v) {
+		
+		if(verificar(v)) {
+			JOptionPane.showMessageDialog(null, "La cancion: " + v.getNombre() + " ya se encuentra en la lista");
+		}
+		else {
+		
 		Nodo1 nodo = new Nodo1();
 		//Se instancia la clase nodo para permitir la interación entre las dos clases
 		nodo.setInformacion(v);
@@ -47,6 +53,8 @@ public class ColaSimple {
 		//Se usa el this para asignar el nuevo valor al nodo
 		this.tam++;
 		//Aqui se usa el this para asignar el nuevo tamaño
+		JOptionPane.showMessageDialog(null, "Agregada a favoritos");
+		}
 	}
 	
 	//Metodo para que se encarga de obtener el tamaño
@@ -89,13 +97,30 @@ public class ColaSimple {
 					return var.getInformacion().getCancion();
 				}else {
 					
-					var = primero.getReferencia();
+					var = var.getReferencia();
 				}
 			}
 			
 			
 			return "NOSE XD";
 		}
+	  
+	  public boolean verificar(CancionesFa v) {
+		  
+		  Nodo1 var = primero;
+		  boolean verif = false;
+			
+			for (int i = 0; i < tam; i++) {
+		
+				if(v.getNombre().equals(var.getInformacion().getNombre())) {
+					verif = true;
+				}else {
+					var = var.getReferencia();
+				}
+			}
+			return verif;
+		  
+	  }
 		
 		
 }

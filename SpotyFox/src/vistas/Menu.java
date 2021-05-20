@@ -44,6 +44,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.Window.Type;
+import javax.swing.JScrollPane;
 
 public class Menu extends JFrame  {
 
@@ -75,6 +76,7 @@ public class Menu extends JFrame  {
 	private final JLabel lblLista = new JLabel("New label");
     ColaSimple cola = new ColaSimple();
     private final JLabel lblBasura = new JLabel("Borrar");
+    private final JScrollPane scrollPane = new JScrollPane();
     
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -103,6 +105,10 @@ public class Menu extends JFrame  {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		/*list.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				*/
 		
 		Musica = new JPanel();
 		Musica.setBackground(new Color(51, 51, 51));
@@ -168,7 +174,6 @@ public class Menu extends JFrame  {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				JOptionPane.showMessageDialog(null, "Agregada a favoritos");
 				cola.encolar(new CancionesFa(nodo.getInformacion().getCaratula(),
 											 nodo.getInformacion().getNombre(),
 											 nodo.getInformacion().getArtista(),
@@ -194,10 +199,10 @@ public class Menu extends JFrame  {
 		lblNewLabel.setBounds(10, 11, 455, 30);
 		
 		Lista.add(lblNewLabel);
+		scrollPane.setBounds(20, 52, 428, 190);
 		
-		/*list.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				*/
+		Lista.add(scrollPane);
+		scrollPane.setViewportView(list);
 		list.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -211,16 +216,13 @@ public class Menu extends JFrame  {
 				}
 			}
 		});
-				
+		
 		
 		
 		list.setValueIsAdjusting(true);
 		list.setBackground(new Color(51, 51, 51));
 		list.setForeground(new Color(255, 255, 255));
 		list.setFont(new Font("Tahoma", Font.BOLD, 20));
-		
-		list.setBounds(20, 52, 428, 190);
-		Lista.add(list);
 		lblBasura.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
