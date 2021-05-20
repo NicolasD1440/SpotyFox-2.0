@@ -89,6 +89,7 @@ public class ColaSimple {
 	    	modelo.remove(list.getSelectedIndex());
 	    	return modelo;
 	    }
+	  
 	  public String Buscar (String a) {
 			Nodo1 var = primero;
 

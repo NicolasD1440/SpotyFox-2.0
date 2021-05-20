@@ -109,6 +109,51 @@ public class Menu extends JFrame  {
 		/*list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 				*/
+		Lista.setBackground(new Color(51, 51, 51));
+		Lista.setBounds(149, 11, 475, 298);
+		
+		contentPane.add(Lista);
+		Lista.setLayout(null);
+		lblNewLabel.setForeground(new Color(255, 255, 255));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 25));
+		lblNewLabel.setBounds(10, 11, 455, 30);
+		
+		Lista.add(lblNewLabel);
+		scrollPane.setBounds(20, 52, 428, 190);
+		
+		Lista.add(scrollPane);
+		scrollPane.setViewportView(list);
+		list.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 1) {
+					try {
+						sd.Reproducir(cola.Buscar(list.getSelectedValue()));
+					} catch (BasicPlayerException e1) {
+						
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+		
+		
+		
+		list.setValueIsAdjusting(true);
+		list.setBackground(new Color(51, 51, 51));
+		list.setForeground(new Color(255, 255, 255));
+		list.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblBasura.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				cola.eliminardato(list);
+			}
+		});
+		lblBasura.setForeground(Color.WHITE);
+		lblBasura.setHorizontalAlignment(SwingConstants.LEFT);
+		lblBasura.setBounds(171, 257, 140, 30);
+		
+		Lista.add(lblBasura);
 		
 		Musica = new JPanel();
 		Musica.setBackground(new Color(51, 51, 51));
@@ -189,51 +234,6 @@ public class Menu extends JFrame  {
 			lblCaratula.setBounds(72, 52, 293, 180);
 			
 			Musica.add(lblCaratula);
-		Lista.setBackground(new Color(51, 51, 51));
-		Lista.setBounds(149, 11, 475, 298);
-		
-		contentPane.add(Lista);
-		Lista.setLayout(null);
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNewLabel.setBounds(10, 11, 455, 30);
-		
-		Lista.add(lblNewLabel);
-		scrollPane.setBounds(20, 52, 428, 190);
-		
-		Lista.add(scrollPane);
-		scrollPane.setViewportView(list);
-		list.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (e.getClickCount() == 1) {
-					try {
-						sd.Reproducir(cola.Buscar(list.getSelectedValue()));
-					} catch (BasicPlayerException e1) {
-						
-						e1.printStackTrace();
-					}
-				}
-			}
-		});
-		
-		
-		
-		list.setValueIsAdjusting(true);
-		list.setBackground(new Color(51, 51, 51));
-		list.setForeground(new Color(255, 255, 255));
-		list.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblBasura.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				cola.eliminardato(list);
-			}
-		});
-		lblBasura.setForeground(Color.WHITE);
-		lblBasura.setHorizontalAlignment(SwingConstants.LEFT);
-		lblBasura.setBounds(171, 257, 140, 30);
-		
-		Lista.add(lblBasura);
 		
 		Reproductor = new JPanel();
 		Reproductor.setBackground(new Color(51, 51, 51));
