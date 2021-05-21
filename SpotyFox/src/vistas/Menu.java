@@ -7,14 +7,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import cola.ColaSimple;
-import cola.Nodo1;
 import inicio.Inicio;
 import javazoom.jlgui.basicplayer.BasicController;
 import javazoom.jlgui.basicplayer.BasicPlayerEvent;
 import javazoom.jlgui.basicplayer.BasicPlayerException;
 import javazoom.jlgui.basicplayer.BasicPlayerListener;
 import listas.Nodo;
+import listasimple.Lista_Simple;
+import listasimple.Nodo1;
 import objeto.Canciones;
 import objeto.CancionesFa;
 import objeto.Sound;
@@ -73,7 +73,7 @@ public class Menu extends JFrame  {
 	private final JLabel lblTime = new JLabel("New label");
 	private final JLabel lblHome = new JLabel("New label");
 	private final JLabel lblLista = new JLabel("New label");
-    ColaSimple cola = new ColaSimple();
+	Lista_Simple mostrar = new Lista_Simple();
     private final JLabel lblBasura = new JLabel("Borrar");
     private final JScrollPane scrollPane = new JScrollPane();
     
@@ -158,7 +158,7 @@ public class Menu extends JFrame  {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				cola.encolar(new CancionesFa(nodo.getInformacion().getCaratula(),
+				mostrar.addAbajo(new CancionesFa(nodo.getInformacion().getCaratula(),
 											 nodo.getInformacion().getNombre(),
 											 nodo.getInformacion().getArtista(),
 											 nodo.getInformacion().getCancion(),
@@ -187,7 +187,7 @@ public class Menu extends JFrame  {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 1) {
 					try {
-						sd.Reproducir(cola.Buscar(list.getSelectedValue()));
+						sd.Reproducir(mostrar.Buscar(list.getSelectedValue()));
 					} catch (BasicPlayerException e1) {
 						
 						e1.printStackTrace();
@@ -205,7 +205,7 @@ public class Menu extends JFrame  {
 		lblBasura.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				cola.eliminardato(list);
+				/*mostrar.eliminar(list);*/
 			}
 		});
 		lblBasura.setForeground(Color.WHITE);
@@ -297,7 +297,7 @@ public class Menu extends JFrame  {
 				Musica.setVisible(false);
 				Lista.setVisible(true);
 				Reproductor.setVisible(false);
-				list.setModel(cola.mostrarDatos());
+				list.setModel(mostrar.mostrarDatos());
 				
 				sd.Pausar();
 				timer.purge();	

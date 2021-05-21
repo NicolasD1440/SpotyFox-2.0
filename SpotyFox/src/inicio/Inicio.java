@@ -4,9 +4,9 @@ import java.io.File;
 
 import javax.swing.JOptionPane;
 
-import cola.ColaSimple;
 import javazoom.jlgui.basicplayer.BasicPlayer;
 import listas.Lista_Circular;
+import listasimple.Lista_Simple;
 import objeto.Canciones;
 import vistas.Portada;
 
@@ -14,7 +14,7 @@ import vistas.Portada;
 public class Inicio {
 	
 	public static Lista_Circular metod = new Lista_Circular();
-	public static ColaSimple colita = new ColaSimple();
+	public static Lista_Simple metod1 = new Lista_Simple();
 
 
 	public static void main(String[] args) {
