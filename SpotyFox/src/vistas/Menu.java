@@ -19,6 +19,7 @@ import objeto.Canciones;
 import objeto.CancionesFa;
 import objeto.Sound;
 
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -45,11 +46,20 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.Window.Type;
 import javax.swing.JScrollPane;
+import java.awt.SystemColor;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
+import java.awt.event.KeyEvent;
 
 public class Menu extends JFrame  {
 
 	private JPanel contentPane;
 	JLabel lblPlay = new JLabel("<P>");
+	JLabel lblF1 = new JLabel("f");
+	JLabel lblF2 = new JLabel("f");
 	private JPanel Musica;
 	private JPanel Reproductor;
 	JList<String> list = new JList<String>();
@@ -76,6 +86,8 @@ public class Menu extends JFrame  {
 	Lista_Simple mostrar = new Lista_Simple();
     private final JLabel lblBasura = new JLabel("Borrar");
     private final JScrollPane scrollPane = new JScrollPane();
+    private final JLabel lblF3 = new JLabel("f");
+    private final JLabel lblF4 = new JLabel("f");
     
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -109,114 +121,9 @@ public class Menu extends JFrame  {
 			public void valueChanged(ListSelectionEvent arg0) {
 				*/
 		
-		Musica = new JPanel();
-		Musica.setBackground(new Color(51, 51, 51));
-		Musica.setBounds(10, 67, 614, 290);
-		contentPane.add(Musica);
-		Musica.setLayout(null);
-		lblNombre.setForeground(new Color(255, 255, 255));
-		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNombre.setBounds(10, 11, 594, 30);
-		
-		Musica.add(lblNombre);
-		
-		
-		lblAutor.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAutor.setForeground(Color.WHITE);
-		lblAutor.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblAutor.setBounds(10, 260, 594, 30);
-		Musica.add(lblAutor);
-		slider.setBounds(570, 71, 10, 209);
-		Musica.add(slider);
-		slider.setOrientation(SwingConstants.VERTICAL);
-		slider.setBackground(Color.DARK_GRAY);
-		slider.setForeground(new Color(0, 102, 204));
-		slider.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {	
-				double a = (slider.getValue() * 1.0)/10;
-			
-			
-					sd.CambiarVolumen(a*a);
-				
-			}
-			
-		});
-		slider.setMaximum(10);
-		
-		slider.setMajorTickSpacing(1);
-		slider.setValue(5);
-		
-		JLabel lblNewLabel_3_1 = new JLabel("Vol");
-		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3_1.setForeground(Color.WHITE);
-		lblNewLabel_3_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_3_1.setBounds(549, 40, 44, 30);
-		Musica.add(lblNewLabel_3_1);
-		lblFavorita.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				mostrar.addAbajo(new CancionesFa(nodo.getInformacion().getCaratula(),
-											 nodo.getInformacion().getNombre(),
-											 nodo.getInformacion().getArtista(),
-											 nodo.getInformacion().getCancion(),
-											 nodo.getInformacion().getTiempo()));
-			}
-		});
-		
-		lblFavorita.setBounds(454, 52, 30, 30);
-		Musica.add(lblFavorita);
-		
-			lblCaratula.setHorizontalAlignment(SwingConstants.CENTER);
-			lblCaratula.setBounds(136, 40, 348, 210);
-			
-			Musica.add(lblCaratula);
-		Lista.setBackground(new Color(51, 51, 51));
-		Lista.setBounds(10, 67, 614, 290);
-		
-		contentPane.add(Lista);
-		Lista.setLayout(null);
-		scrollPane.setBounds(20, 24, 569, 192);
-		
-		Lista.add(scrollPane);
-		scrollPane.setViewportView(list);
-		list.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (e.getClickCount() == 1) {
-					try {
-						sd.Reproducir(mostrar.Buscar(list.getSelectedValue()));
-					} catch (BasicPlayerException e1) {
-						
-						e1.printStackTrace();
-					}
-				}
-			}
-		});
-		
-		
-		
-		list.setValueIsAdjusting(true);
-		list.setBackground(new Color(51, 51, 51));
-		list.setForeground(new Color(255, 255, 255));
-		list.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblBasura.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				/*mostrar.eliminar(list);*/
-			}
-		});
-		lblBasura.setForeground(Color.WHITE);
-		lblBasura.setHorizontalAlignment(SwingConstants.LEFT);
-		lblBasura.setBounds(247, 238, 140, 30);
-		
-		Lista.add(lblBasura);
-		
 		Reproductor = new JPanel();
 		Reproductor.setBackground(new Color(51, 51, 51));
-		Reproductor.setBounds(10, 368, 614, 72);
+		Reproductor.setBounds(0, 379, 634, 72);
 		contentPane.add(Reproductor);
 		Reproductor.setLayout(null);
 		lblPlay.addMouseListener(new MouseAdapter() {
@@ -246,7 +153,7 @@ public class Menu extends JFrame  {
 			}
 		});
 		
-		lblPlay.setBounds(297, 31, 30, 29);
+		lblPlay.setBounds(282, 31, 30, 29);
 		Reproductor.add(lblPlay);
 		lblPausa.addMouseListener(new MouseAdapter() {
 			@Override
@@ -259,12 +166,12 @@ public class Menu extends JFrame  {
 			    progreso.repaint();
 			}		
 		});
-		lblPausa.setBounds(337, 31, 30, 29);
+		lblPausa.setBounds(322, 31, 30, 29);
 		
 		Reproductor.add(lblPausa);
-		lblAnteriorC.setBounds(257, 31, 30, 29);
+		lblAnteriorC.setBounds(242, 31, 30, 29);
 		Reproductor.add(lblAnteriorC);
-		lblSiguienteC.setBounds(377, 30, 30, 30);
+		lblSiguienteC.setBounds(362, 30, 30, 30);
 		Reproductor.add(lblSiguienteC);
 		progreso.setBounds(37, 11, 567, 8);
 		Reproductor.add(progreso);
@@ -272,40 +179,9 @@ public class Menu extends JFrame  {
 		lblTime.setBounds(10, 5, 46, 14);
 		Reproductor.add(lblTime);
 		lblTime.setForeground(Color.WHITE);
-		lblLista.setBounds(50, 11, 30, 32);
-		contentPane.add(lblLista);
-		lblHome.setBounds(10, 11, 30, 32);
-		contentPane.add(lblHome);
-		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setBounds(100, 26, 444, 30);
-		contentPane.add(lblTitulo);
-		lblTitulo.setForeground(new Color(255, 255, 255));
-		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblHome.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				lblTitulo.setText("Nuestra musica");
-				Musica.setVisible(true);
-				Lista.setVisible(false);
-				Reproductor.setVisible(true);
-			}
-		});
-		lblLista.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				lblTitulo.setText("Favoritas");
-				Musica.setVisible(false);
-				Lista.setVisible(true);
-				Reproductor.setVisible(false);
-				list.setModel(mostrar.mostrarDatos());
-				
-				sd.Pausar();
-				timer.purge();	
-				progreso.setValue(0);
-			    progreso.repaint();
-			    lblTime.setText(String.valueOf(nodo.getInformacion().getTiempo()));
-			}
-		});
+		lblF4.setBounds(0, 0, 634, 72);
+		
+		Reproductor.add(lblF4);
 		lblSiguienteC.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -336,8 +212,169 @@ public class Menu extends JFrame  {
 				}
 			}
 		});
+		
+		Musica = new JPanel();
+		Musica.setBackground(new Color(51, 51, 51));
+		Musica.setBounds(0, 67, 634, 312);
+		contentPane.add(Musica);
+		Musica.setLayout(null);
+		lblNombre.setForeground(new Color(255, 255, 255));
+		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 17));
+		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNombre.setBounds(10, 11, 614, 30);
+		
+		Musica.add(lblNombre);
+		
+		
+		lblAutor.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAutor.setForeground(Color.WHITE);
+		lblAutor.setFont(new Font("Tahoma", Font.BOLD, 17));
+		lblAutor.setBounds(10, 275, 614, 37);
+		Musica.add(lblAutor);
+		slider.setBounds(586, 71, 10, 209);
+		Musica.add(slider);
+		slider.setOrientation(SwingConstants.VERTICAL);
+		slider.setBackground(Color.DARK_GRAY);
+		slider.setForeground(new Color(0, 102, 204));
+		slider.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {	
+				double a = (slider.getValue() * 1.0)/10;
+			
+			
+					sd.CambiarVolumen(a*a);
+				
+			}
+			
+		});
+		slider.setMaximum(10);
+		
+		slider.setMajorTickSpacing(1);
+		slider.setValue(5);
+		
+		JLabel lblNewLabel_3_1 = new JLabel("Vol");
+		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3_1.setForeground(Color.WHITE);
+		lblNewLabel_3_1.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel_3_1.setBounds(558, 30, 66, 30);
+		Musica.add(lblNewLabel_3_1);
+		lblFavorita.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				mostrar.addAbajo(new CancionesFa(nodo.getInformacion().getCaratula(),
+											 nodo.getInformacion().getNombre(),
+											 nodo.getInformacion().getArtista(),
+											 nodo.getInformacion().getCancion(),
+											 nodo.getInformacion().getTiempo()));
+			}
+		});
+		
+		lblFavorita.setBounds(479, 40, 30, 30);
+		Musica.add(lblFavorita);
+		lblCaratula.setDisplayedMnemonic(KeyEvent.VK_JAPANESE_ROMAN);
+		lblCaratula.setBorder(UIManager.getBorder("CheckBox.border"));
+		
+			lblCaratula.setHorizontalAlignment(SwingConstants.CENTER);
+			lblCaratula.setBounds(130, 40, 380, 240);
+			
+			Musica.add(lblCaratula);
+			
+			lblF1.setBounds(0, 0, 634, 312);
+			Musica.add(lblF1);
+		Lista.setBackground(new Color(51, 51, 51));
+		Lista.setBounds(0, 67, 634, 384);
+		
+		contentPane.add(Lista);
+		Lista.setLayout(null);
+		scrollPane.setBounds(20, 24, 592, 290);
+		
+		Lista.add(scrollPane);
+		scrollPane.setViewportView(list);
+		list.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 1) {
+					try {
+						sd.Reproducir(mostrar.Buscar(list.getSelectedValue()));
+					} catch (BasicPlayerException e1) {
+						
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+		
+		
+		
+		list.setValueIsAdjusting(true);
+		list.setBackground(new Color(51, 51, 51));
+		list.setForeground(new Color(255, 255, 255));
+		list.setFont(new Font("Tahoma", Font.BOLD, 20));
+		
+		DefaultListCellRenderer cellRenderer = (DefaultListCellRenderer)list.getCellRenderer();
+		
+		lblBasura.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				//mostrar.eliminarValor(list.getSelectedValue());
+				//mostrar.mostrarDatos();
+			}
+		});
+		lblBasura.setForeground(Color.WHITE);
+		lblBasura.setHorizontalAlignment(SwingConstants.LEFT);
+		lblBasura.setBounds(259, 343, 140, 30);
+		
+		Lista.add(lblBasura);
+		
+		lblF2.setBounds(0, -11, 634, 395);
+		Lista.add(lblF2);
+		cellRenderer.setHorizontalAlignment(SwingConstants .CENTER);
 		setLocationRelativeTo(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(SystemColor.desktop);
+		panel.setBounds(0, 0, 634, 64);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		lblTitulo.setBounds(102, 0, 433, 64);
+		panel.add(lblTitulo);
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitulo.setForeground(new Color(255, 255, 255));
+		lblTitulo.setFont(new Font("Script MT Bold", Font.PLAIN, 60));
 		lblTitulo.setText("Nuestra musica");
+		lblLista.setBounds(64, 20, 30, 32);
+		panel.add(lblLista);
+		lblHome.setBounds(24, 20, 30, 32);
+		panel.add(lblHome);
+		lblF3.setBounds(0, 0, 634, 64);
+		
+		panel.add(lblF3);
+		lblHome.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblTitulo.setText("Nuestra musica");
+				Musica.setVisible(true);
+				Lista.setVisible(false);
+				Reproductor.setVisible(true);
+			}
+		});
+		lblLista.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblTitulo.setText("Favoritas");
+				Musica.setVisible(false);
+				Lista.setVisible(true);
+				Reproductor.setVisible(false);
+				list.setModel(mostrar.mostrarDatos());
+				
+				sd.Pausar();
+				timer.purge();	
+				progreso.setValue(0);
+			    progreso.repaint();
+			    lblTime.setText(String.valueOf(nodo.getInformacion().getTiempo()));
+			}
+		});
 		Caratula();
 		Botones();
 		mostrarDatos();
@@ -356,6 +393,23 @@ public class Menu extends JFrame  {
 		Image lista = new ImageIcon(this.getClass().getResource("/Lista.png"))
 				.getImage().getScaledInstance(lblLista.getWidth(), lblLista.getHeight(),Image.SCALE_DEFAULT);
 			lblLista.setIcon(new ImageIcon(lista));
+			
+		//Fondos 
+		Image f1 = new ImageIcon(this.getClass().getResource("/f1.jpg"))
+				.getImage().getScaledInstance(lblF1.getWidth(), lblF1.getHeight(),Image.SCALE_DEFAULT);
+			lblF1.setIcon(new ImageIcon(f1));			
+			
+		Image f2 = new ImageIcon(this.getClass().getResource("/f1.jpg"))
+				.getImage().getScaledInstance(lblF2.getWidth(), lblF2.getHeight(),Image.SCALE_DEFAULT);
+			lblF2.setIcon(new ImageIcon(f2));
+			
+		Image f3 = new ImageIcon(this.getClass().getResource("/f3.jpg"))
+				.getImage().getScaledInstance(lblF3.getWidth(), lblF3.getHeight(),Image.SCALE_DEFAULT);
+			lblF3.setIcon(new ImageIcon(f3));
+			
+		Image f4 = new ImageIcon(this.getClass().getResource("/f3.jpg"))
+				.getImage().getScaledInstance(lblF4.getWidth(), lblF4.getHeight(),Image.SCALE_DEFAULT);
+			lblF4.setIcon(new ImageIcon(f4));
 			
 		//imagenes de Reproductor
 		Image play = new ImageIcon(this.getClass().getResource("/Play.png"))

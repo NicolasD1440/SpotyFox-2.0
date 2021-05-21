@@ -35,20 +35,7 @@ public class Lista_Simple {
 	public boolean isEmpty() {
 		return this.primero == null;
 	}
-	
-	/*public void addArriba(CancionesFa v) {
-		Nodo1 nodo = new Nodo1();
-		nodo.setInformacion(v);
-		if(isEmpty()) {
-			this.primero = nodo;
-		}else {
-			nodo.setRef(primero);
-			this.primero = nodo;
-		}
-		this.size++;
-	}*/
-	
-	
+		
 	public void addAbajo(CancionesFa v) {
 		
 		if(verificar(v)) {
@@ -72,6 +59,27 @@ public class Lista_Simple {
 		JOptionPane.showMessageDialog(null, "Agregada a favoritos");
 	}
 	}
+	
+	//Eliminar por valor
+		/*public void eliminarValor(String v) {
+			
+			Nodo1 var = primero;
+			Nodo1 ant = null;
+
+			for(int i = 0; i < size; i++) {
+				
+				if(v.equals(var.getInformacion().getNombre())) {
+					
+					ant.setRef(var.getRef());
+										
+				}else {
+					
+					ant = var;
+					var = var.getRef();
+				}
+			}
+
+		}*/
 	
 	public DefaultListModel<String> mostrarDatos() {
 		

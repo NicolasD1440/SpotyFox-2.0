@@ -25,10 +25,6 @@ public class Inicio {
 		metod.addElement(new Canciones("/Caratula3.jpg","Cuando hablan las miradas","Guayacan","recursos/Cuando.mp3", 4.37));
 		metod.addElement(new Canciones("/Caratula4.jpg","Hotaru No Hikari","Ikimono-Gakari","recursos/naruto.mp3", 4.1));
 		
-		 //String[] arr = {"Juan","Daniel","Cristian"};
-		 //System.out.println(colita.Buscar("Another one bites the dust"));
-
-		//reproducir("recursos/Lindsey.mp3");
 		Portada ventana = new Portada();
 		ventana.setVisible(true);
 	}
