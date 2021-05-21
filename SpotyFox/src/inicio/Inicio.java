@@ -14,7 +14,7 @@ import vistas.Portada;
 public class Inicio {
 	
 	public static Lista_Circular metod = new Lista_Circular();
-	public static Lista_Simple metod1 = new Lista_Simple();
+	
 
 
 	public static void main(String[] args) {
