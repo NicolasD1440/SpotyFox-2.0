@@ -153,7 +153,7 @@ public class Menu extends JFrame  {
 			}
 		});
 		
-		lblPlay.setBounds(282, 31, 30, 29);
+		lblPlay.setBounds(274, 26, 46, 34);
 		Reproductor.add(lblPlay);
 		lblPausa.addMouseListener(new MouseAdapter() {
 			@Override
@@ -166,12 +166,12 @@ public class Menu extends JFrame  {
 			    progreso.repaint();
 			}		
 		});
-		lblPausa.setBounds(322, 31, 30, 29);
+		lblPausa.setBounds(322, 26, 46, 35);
 		
 		Reproductor.add(lblPausa);
-		lblAnteriorC.setBounds(242, 31, 30, 29);
+		lblAnteriorC.setBounds(218, 26, 46, 34);
 		Reproductor.add(lblAnteriorC);
-		lblSiguienteC.setBounds(362, 30, 30, 30);
+		lblSiguienteC.setBounds(378, 26, 46, 35);
 		Reproductor.add(lblSiguienteC);
 		progreso.setBounds(37, 11, 567, 8);
 		Reproductor.add(progreso);
@@ -270,7 +270,7 @@ public class Menu extends JFrame  {
 			}
 		});
 		
-		lblFavorita.setBounds(479, 40, 30, 30);
+		lblFavorita.setBounds(480, 40, 29, 30);
 		Musica.add(lblFavorita);
 		lblCaratula.setDisplayedMnemonic(KeyEvent.VK_JAPANESE_ROMAN);
 		lblCaratula.setBorder(UIManager.getBorder("CheckBox.border"));
@@ -323,7 +323,7 @@ public class Menu extends JFrame  {
 		});
 		lblBasura.setForeground(Color.WHITE);
 		lblBasura.setHorizontalAlignment(SwingConstants.LEFT);
-		lblBasura.setBounds(259, 343, 140, 30);
+		lblBasura.setBounds(290, 318, 68, 55);
 		
 		Lista.add(lblBasura);
 		
@@ -337,28 +337,8 @@ public class Menu extends JFrame  {
 		panel.setBounds(0, 0, 634, 64);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		lblTitulo.setBounds(102, 0, 433, 64);
-		panel.add(lblTitulo);
-		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setForeground(new Color(255, 255, 255));
-		lblTitulo.setFont(new Font("Script MT Bold", Font.PLAIN, 60));
-		lblTitulo.setText("Nuestra musica");
-		lblLista.setBounds(64, 20, 30, 32);
+		lblLista.setBounds(538, 15, 59, 35);
 		panel.add(lblLista);
-		lblHome.setBounds(24, 20, 30, 32);
-		panel.add(lblHome);
-		lblF3.setBounds(0, 0, 634, 64);
-		
-		panel.add(lblF3);
-		lblHome.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				lblTitulo.setText("Nuestra musica");
-				Musica.setVisible(true);
-				Lista.setVisible(false);
-				Reproductor.setVisible(true);
-			}
-		});
 		lblLista.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -373,8 +353,29 @@ public class Menu extends JFrame  {
 				progreso.setValue(0);
 			    progreso.repaint();
 			    lblTime.setText(String.valueOf(nodo.getInformacion().getTiempo()));
+			    
 			}
 		});
+		lblHome.setBounds(44, 12, 59, 41);
+		panel.add(lblHome);
+		lblHome.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblTitulo.setText("Nuestra musica");
+				Musica.setVisible(true);
+				Lista.setVisible(false);
+				Reproductor.setVisible(true);
+			}
+		});
+		lblTitulo.setBounds(102, 0, 433, 64);
+		panel.add(lblTitulo);
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitulo.setForeground(new Color(255, 255, 255));
+		lblTitulo.setFont(new Font("Script MT Bold", Font.PLAIN, 60));
+		lblTitulo.setText("Nuestra musica");
+		lblF3.setBounds(0, 0, 634, 85);
+		
+		panel.add(lblF3);
 		Caratula();
 		Botones();
 		mostrarDatos();
@@ -390,7 +391,7 @@ public class Menu extends JFrame  {
 				.getImage().getScaledInstance(lblHome.getWidth(), lblHome.getHeight(),Image.SCALE_DEFAULT);
 			lblHome.setIcon(new ImageIcon(home));
 				
-		Image lista = new ImageIcon(this.getClass().getResource("/Lista.png"))
+		Image lista = new ImageIcon(this.getClass().getResource("/Favoritos.png"))
 				.getImage().getScaledInstance(lblLista.getWidth(), lblLista.getHeight(),Image.SCALE_DEFAULT);
 			lblLista.setIcon(new ImageIcon(lista));
 			
@@ -416,19 +417,19 @@ public class Menu extends JFrame  {
 				.getImage().getScaledInstance(lblPlay.getWidth(), lblPlay.getHeight(),Image.SCALE_DEFAULT);
 			lblPlay.setIcon(new ImageIcon(play));
 			
-		Image anteriorC = new ImageIcon(this.getClass().getResource("/Anterior.png"))
+		Image anteriorC = new ImageIcon(this.getClass().getResource("/Atras.png"))
 				.getImage().getScaledInstance(lblAnteriorC.getWidth(), lblAnteriorC.getHeight(),Image.SCALE_DEFAULT);
 			lblAnteriorC.setIcon(new ImageIcon(anteriorC));
 				
-		Image siguienteC = new ImageIcon(this.getClass().getResource("/Siguiente.png"))
+		Image siguienteC = new ImageIcon(this.getClass().getResource("/Adelante.png"))
 				.getImage().getScaledInstance(lblSiguienteC.getWidth(), lblSiguienteC.getHeight(),Image.SCALE_DEFAULT);
 			lblSiguienteC.setIcon(new ImageIcon(siguienteC));
 			
-		Image pause = new ImageIcon(this.getClass().getResource("/Pause.png"))
+		Image pause = new ImageIcon(this.getClass().getResource("/Pausa.png"))
 				.getImage().getScaledInstance(lblSiguienteC.getWidth(), lblSiguienteC.getHeight(),Image.SCALE_DEFAULT);
 			lblPausa.setIcon(new ImageIcon(pause));
 			
-		Image Favorita = new ImageIcon(this.getClass().getResource("/Favorita.png"))
+		Image Favorita = new ImageIcon(this.getClass().getResource("/AgregarF.png"))
 				.getImage().getScaledInstance(lblFavorita.getWidth(), lblFavorita.getHeight(),Image.SCALE_DEFAULT);
 			lblFavorita.setIcon(new ImageIcon(Favorita));
 			
