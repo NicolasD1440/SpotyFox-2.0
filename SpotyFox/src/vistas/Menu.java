@@ -166,10 +166,10 @@ public class Menu extends JFrame  {
 			    progreso.repaint();
 			}		
 		});
-		lblPausa.setBounds(322, 26, 46, 35);
+		lblPausa.setBounds(322, 26, 46, 36);
 		
 		Reproductor.add(lblPausa);
-		lblAnteriorC.setBounds(218, 26, 46, 34);
+		lblAnteriorC.setBounds(221, 25, 46, 35);
 		Reproductor.add(lblAnteriorC);
 		lblSiguienteC.setBounds(378, 26, 46, 35);
 		Reproductor.add(lblSiguienteC);
@@ -270,7 +270,7 @@ public class Menu extends JFrame  {
 			}
 		});
 		
-		lblFavorita.setBounds(480, 40, 29, 30);
+		lblFavorita.setBounds(470, 47, 32, 32);
 		Musica.add(lblFavorita);
 		lblCaratula.setDisplayedMnemonic(KeyEvent.VK_JAPANESE_ROMAN);
 		lblCaratula.setBorder(UIManager.getBorder("CheckBox.border"));
@@ -337,7 +337,7 @@ public class Menu extends JFrame  {
 		panel.setBounds(0, 0, 634, 64);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		lblLista.setBounds(538, 15, 59, 35);
+		lblLista.setBounds(532, 0, 64, 64);
 		panel.add(lblLista);
 		lblLista.addMouseListener(new MouseAdapter() {
 			@Override
@@ -356,7 +356,7 @@ public class Menu extends JFrame  {
 			    
 			}
 		});
-		lblHome.setBounds(44, 12, 59, 41);
+		lblHome.setBounds(46, 0, 64, 64);
 		panel.add(lblHome);
 		lblHome.addMouseListener(new MouseAdapter() {
 			@Override
@@ -387,7 +387,7 @@ public class Menu extends JFrame  {
 	private void Botones() {
 		
 		//imagenes de Menu
-		Image home = new ImageIcon(this.getClass().getResource("/Home.png"))
+		Image home = new ImageIcon(this.getClass().getResource("/homen.png"))
 				.getImage().getScaledInstance(lblHome.getWidth(), lblHome.getHeight(),Image.SCALE_DEFAULT);
 			lblHome.setIcon(new ImageIcon(home));
 				
@@ -429,7 +429,7 @@ public class Menu extends JFrame  {
 				.getImage().getScaledInstance(lblSiguienteC.getWidth(), lblSiguienteC.getHeight(),Image.SCALE_DEFAULT);
 			lblPausa.setIcon(new ImageIcon(pause));
 			
-		Image Favorita = new ImageIcon(this.getClass().getResource("/AgregarF.png"))
+		Image Favorita = new ImageIcon(this.getClass().getResource("/Favoritas1.png"))
 				.getImage().getScaledInstance(lblFavorita.getWidth(), lblFavorita.getHeight(),Image.SCALE_DEFAULT);
 			lblFavorita.setIcon(new ImageIcon(Favorita));
 			
