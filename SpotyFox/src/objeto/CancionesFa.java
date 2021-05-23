@@ -3,9 +3,9 @@ package objeto;
 public class CancionesFa {
 
 	private String caratula, nombre, artista, cancion;
-	private double tiempo;
+	private String tiempo;
 
-	public CancionesFa(String caratula, String nombre, String artista, String cancion, double tiempo) {
+	public CancionesFa(String caratula, String nombre, String artista, String cancion, String tiempo) {
 			super();
 			this.caratula = caratula;
 			this.nombre = nombre;
@@ -46,14 +46,15 @@ public class CancionesFa {
 		this.cancion = cancion;
 	}
 
-	public double getTiempo() {
+	public String getTiempo() {
 		return tiempo;
 	}
 
-	public void setTiempo(int tiempo) {
+	public void setTiempo(String tiempo) {
 		this.tiempo = tiempo;
 	}
 
 	
 	
 }
+
