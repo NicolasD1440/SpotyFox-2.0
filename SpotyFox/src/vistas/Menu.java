@@ -131,17 +131,18 @@ public class Menu extends JFrame  {
 			public void mouseClicked(MouseEvent e) {
 			    timer.purge();
 				progreso.setValue(0);
-			 progreso.setMaximum(0);
+			    progreso.setMaximum(0);
 			    
 			   if (sd.Estado() == 0) {
 				sd.Pausar();
+				lblTime.setText("0:00");
 			}else {
 				
 				
 				try {
 					sd.Reproducir(nodo.getInformacion().getCancion()); 
-					tiempo();
-				    incremento();
+					temporizador(nodo.getInformacion().getTiempo());
+				    incremento(nodo.getInformacion().getTiempo());
 				} catch (BasicPlayerException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -151,6 +152,8 @@ public class Menu extends JFrame  {
           
 		
 			}
+
+			
 		});
 		
 		lblPlay.setBounds(274, 26, 46, 34);
@@ -455,8 +458,14 @@ public class Menu extends JFrame  {
  	     
    }
   
-    public void incremento() {
-    	int con = (int) (nodo.getInformacion().getTiempo()*59);
+    public void incremento(String a) {
+    	String[] parts = a.split(":");
+		//int[] b = new int[2];
+		int fr = Integer.parseInt(parts[0]);
+		int ft = Integer.parseInt(parts[1]);
+		
+    	int con = (int) ((fr*60) + ft);
+    	System.out.println(con);
         progreso.setMaximum(con);
         
     	TimerTask tarea = new TimerTask() {
@@ -464,10 +473,12 @@ public class Menu extends JFrame  {
 
 			@Override
 			public void run() {
-				if(x<=con && sd.Estado() == 0){
+				if(x < con && sd.Estado() == 0){
 			    x++;
 				progreso.setValue(x);
+				System.out.println(x);
 				}else if(sd.Estado()==1) {
+					
 					cancel();
 				}
 				
@@ -479,7 +490,7 @@ public class Menu extends JFrame  {
 		 timer.schedule(tarea, 0,1000);
     
     }
-    public void tiempo() {
+   /* public void tiempo() {
     	TimerTask tarea1 = new TimerTask() {
 			 double n = nodo.getInformacion().getTiempo();
              double x = 0;
@@ -500,5 +511,41 @@ public class Menu extends JFrame  {
 		};
 		 timer.schedule(tarea1, 0,592);
     	
-    }
+    }*/
+    public  void  temporizador(String a){
+		String[] parts = a.split(":");
+		int[] b = new int[2];
+		
+		 
+		for (int i = 0; i < parts.length; i++) {
+			 b[i] = Integer.parseInt(parts[i]);
+			
+		}
+	
+	
+		 TimerTask tarea = new TimerTask() {
+			int segundos;
+            int minutos;
+			@Override
+			public void run() {
+				//while(minutos!=b[0] && segundos!=b[1]) 
+				if(minutos < b[0]  && sd.Estado()==0|| segundos< b[1] && sd.Estado()==0 ) {
+					segundos++;
+					if(segundos > 59) {
+						segundos =0;
+						minutos++;
+					}
+					lblTime.setText(String.valueOf(minutos + ":" + segundos));
+					//System.out.println(minutos + ":" + segundos);
+					
+				}else {
+					cancel();
+				}
+				
+				
+		}
+		
+		};
+		 timer.schedule(tarea, 0,1000);
+		}
 }
