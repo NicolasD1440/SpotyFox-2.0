@@ -9,6 +9,7 @@ import objeto.CancionesFa;
 
 public class Lista_Simple {
 	
+	
 	private Nodo1 primero; //Acceder al primer nodo de la lista
 	private int size;
 	
@@ -61,25 +62,35 @@ public class Lista_Simple {
 	}
 	
 	//Eliminar por valor
-		/*public void eliminarValor(String v) {
+		public void eliminarValor(String v) {
+			
 			
 			Nodo1 var = primero;
 			Nodo1 ant = null;
-
+						
 			for(int i = 0; i < size; i++) {
 				
 				if(v.equals(var.getInformacion().getNombre())) {
 					
 					ant.setRef(var.getRef());
-										
-				}else {
+					
+															
+				}
+				else {
 					
 					ant = var;
 					var = var.getRef();
 				}
 			}
+			this.size--;
 
-		}*/
+		}
+		
+		public DefaultListModel<String> eliminardato(JList<String> list) {
+	    	DefaultListModel<String> modelo = (DefaultListModel<String>) list.getModel();
+	    	modelo.remove(list.getSelectedIndex());
+	    	return modelo;
+	    }
 	
 	public DefaultListModel<String> mostrarDatos() {
 		

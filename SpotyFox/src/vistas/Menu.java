@@ -320,8 +320,9 @@ public class Menu extends JFrame  {
 		lblBasura.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				//mostrar.eliminarValor(list.getSelectedValue());
-				//mostrar.mostrarDatos();
+				mostrar.eliminarValor(list.getSelectedValue());	
+				mostrar.eliminardato(list);
+				sd.Pausar();
 			}
 		});
 		lblBasura.setForeground(Color.WHITE);
@@ -351,7 +352,7 @@ public class Menu extends JFrame  {
 				Reproductor.setVisible(false);
 				list.setModel(mostrar.mostrarDatos());
 				
-				sd.Pausar();
+				sd.Parar();
 				timer.purge();	
 				progreso.setValue(0);
 			    progreso.repaint();
@@ -490,28 +491,7 @@ public class Menu extends JFrame  {
 		 timer.schedule(tarea, 0,1000);
     
     }
-   /* public void tiempo() {
-    	TimerTask tarea1 = new TimerTask() {
-			 double n = nodo.getInformacion().getTiempo();
-             double x = 0;
-			@Override
-			public void run() {
-				if(x<=n && sd.Estado() ==0){
-			    x += 0.01;
-			    lblTime.setText(String.valueOf(Math.round(x*100.0)/100.0));
-				
-				}else if(sd.Estado()==1) {
-					cancel();
-				}
-				
-				
-				
-			}
-			 
-		};
-		 timer.schedule(tarea1, 0,592);
-    	
-    }*/
+  
     public  void  temporizador(String a){
 		String[] parts = a.split(":");
 		int[] b = new int[2];
