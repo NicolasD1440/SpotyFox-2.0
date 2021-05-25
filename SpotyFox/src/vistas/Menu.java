@@ -163,12 +163,11 @@ public class Menu extends JFrame  {
 		lblPausa.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//sd.Stop();
-				sd.Pausar();
-				//timer.cancel();
-				timer.purge();	
-				progreso.setValue(0);
-			    progreso.repaint();
+
+				sd.Pausar();// pausa la cancion
+				timer.purge();//eliminamos de memoria lo que contenga el timer		
+				progreso.setValue(0);//le enviamos un 0 a la barra de progreso, para que no quede con el valor anterior
+			    progreso.repaint();//reteamos los valores que contenga la barra de progreso
 			}		
 		});
 		lblPausa.setBounds(322, 26, 46, 36);
@@ -254,9 +253,12 @@ public class Menu extends JFrame  {
 		slider.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {	
+				//ya que la libreria BasicPlayer solo admite valores entre 0.0 y 1.0
+				// tomamos yn slider con valores del 0 al 10, cuando el usuario interandua con el slider y modifica su valor por defecto
+				//multiplicamos por 1.0 para convertirmo en un double, y los divimos entre 10
 				double a = (slider.getValue() * 1.0)/10;
 			
-			
+			//usamos una formula cuadratica es de a^2 o en este caso a*a para que el audio, suene de mojor forma.
 					sd.CambiarVolumen(a*a);
 				
 			}
@@ -369,10 +371,12 @@ public class Menu extends JFrame  {
 				list.setModel(mostrar.mostrarDatos());//Se muestran los elementos de la Lista
 				
 				sd.Parar();//Se para la canción si esta sonando al presionar este boton
-				timer.purge();//	
-				progreso.setValue(0);
-			    progreso.repaint();
-			    lblTime.setText(String.valueOf(nodo.getInformacion().getTiempo()));
+				timer.purge();//eliminamos de memoria lo que contenga el timer	
+				progreso.setValue(0);//le enviamos un 0 a la barra de progreso para que cuando estemos en la ventana de 
+				//favoritos no siga aumentando ni quede con un valor cargado anteriormenete
+			    progreso.repaint();//reteamos los valores que contenga la barra de progreso
+			    lblTime.setText(String.valueOf(nodo.getInformacion().getTiempo()));//le enviamos al label que contiene el tiempo, 
+			    //el tiempo que dura la cancion
 			    
 			}
 		});
@@ -477,15 +481,17 @@ public class Menu extends JFrame  {
  	      lblTime.setText(String.valueOf(nodo.getInformacion().getTiempo()));//tiempo de la cancion
  	     
    }
-  
+    // ya que conocemos el tiempo de dura la cancion se lo pasamos por parametro al metododo
     public void incremento(String a) {
     	String[] parts = a.split(":");
-		
+    	//dividimos el String que contiene el tiempo en dos, y lo almacenamos en dos variables distintas 
+    	//la variable fr sera los minutos y lavariable ft seran los segundos, por ejemplo 4:30 , fr->4 , ft->30
 		int fr = Integer.parseInt(parts[0]);
 		int ft = Integer.parseInt(parts[1]);
-		
+		//usamos la form de convertir los minutos a segundos (minutos*60/1+segundos)
     	int con = (int) ((fr*60) + ft);
-    	System.out.println(con);
+    	//System.out.println(con);
+    	//le mandamos la candidad de segundos que dura la cancion al Progrebar para este tomen ese valr como maximo
         progreso.setMaximum(con);
         
     	TimerTask tarea = new TimerTask() {
@@ -493,24 +499,28 @@ public class Menu extends JFrame  {
 
 			@Override
 			public void run() {
+				//sumamos 1 a una variable x  cada segundo, este se ejecutara cada segundo si aun no alcanza el tiempo que dura
+				//la cancion y si su estado es 0 es decir se esta reproduciendo
 				if(x < con && sd.Estado() == 0){
 			    x++;
 				progreso.setValue(x);
 				System.out.println(x);
 				}else if(sd.Estado()==1) {
-					
+					//cando la condicion no se cumpla cancelamos el timer
 					cancel();
 				}
 			} 
 		};
 		 timer.schedule(tarea, 0,1000);
     }
-  
+  // ya que conocemos el tiempo de dura la cancion se lo pasamos por parametro al metododo
     public  void  temporizador(String a){
+    	//dividimos el String que contiene el tiempo en dos, y lo almacenamos en un array
+    	//la posicion 0 sera los minutos y la posicion 1 seran los segundos, por ejemplo 4:30 , 0->4 , 1->30
 		String[] parts = a.split(":");
 		int[] b = new int[2];
 		
-		 
+		 //pasamos por las posicion del arraglo y convertimos estos valores en enteros
 		for (int i = 0; i < parts.length; i++) {
 			 b[i] = Integer.parseInt(parts[i]);
 			
@@ -522,22 +532,27 @@ public class Menu extends JFrame  {
             int minutos;
 			@Override
 			public void run() {
-				 
+				 //mientras los minutos o los segundo sean menores al parametro que se les mando este funcion se ejecuta
 				if(minutos < b[0]  && sd.Estado()==0|| segundos< b[1] && sd.Estado()==0 ) {
+					//sumamos 1 a la variable segundos, cada segundo
 					segundos++;
+					//si la variable segundo llega a 59, lo convertimos y 0 y sumamos 1 en minutos
 					if(segundos > 59) {
 						segundos =0;
 						minutos++;
 					}
+					//enviamos el resultado a un label que contiene el tiempo
 					lblTime.setText(String.valueOf(minutos + ":" + segundos));
 					
-					
+					//cuando la condicion no se cumpla ya que tanto los minutos como los segundo han alcanzado los valores que le 
+					//pasamos por parametro, cancelamos el timer para que no se siga ejecutanto
 				}else {
 					cancel();
 				}
 		}
 		
 		};
+		//se ejecuta cada segundo
 		 timer.schedule(tarea, 0,1000);
 		}
 }
