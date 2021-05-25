@@ -12,7 +12,7 @@ import javazoom.jlgui.basicplayer.BasicController;
 import javazoom.jlgui.basicplayer.BasicPlayerEvent;
 import javazoom.jlgui.basicplayer.BasicPlayerException;
 import javazoom.jlgui.basicplayer.BasicPlayerListener;
-import listas.Nodo;
+import listaCircular.Nodo;
 import listasimple.Lista_Simple;
 import listasimple.Nodo1;
 import objeto.Canciones;

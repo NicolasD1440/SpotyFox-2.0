@@ -1,9 +1,10 @@
-package listas;
+package listaCircular;
 
 import objeto.Canciones;
 
 public class Lista_Circular {
 
+	
 	//Elementos de la lista
 	private Nodo first;//Nodo de acceso
 	private Nodo last;

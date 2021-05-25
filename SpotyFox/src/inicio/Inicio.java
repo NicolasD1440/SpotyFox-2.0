@@ -5,7 +5,7 @@ import java.io.File;
 import javax.swing.JOptionPane;
 
 import javazoom.jlgui.basicplayer.BasicPlayer;
-import listas.Lista_Circular;
+import listaCircular.Lista_Circular;
 import listasimple.Lista_Simple;
 import objeto.Canciones;
 import vistas.Portada;

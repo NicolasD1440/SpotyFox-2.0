@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import inicio.Inicio;
-import listas.Lista_Circular;
-import listas.Nodo;
+import listaCircular.Lista_Circular;
+import listaCircular.Nodo;
 
 import javax.swing.JLabel;
 import java.awt.Color;
