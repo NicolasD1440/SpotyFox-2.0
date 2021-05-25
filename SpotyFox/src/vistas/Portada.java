@@ -23,13 +23,18 @@ import javax.swing.border.BevelBorder;
 
 public class Portada extends JFrame {
 
+
+	//Se instancia la clase de la lista Circular
 	Lista_Circular metod = new Lista_Circular();
+	//Se instancia la clase Inicio
 	Inicio principal = new Inicio();
+	//Se colocan las variables de los label contentpane, JprogressBar 
+	//en la parte superior ya que serán utilizadas en los métodos dentro de la interfaz
 	private JPanel contentPane;
 	JLabel lblNombreL = new JLabel("New label");
 	JLabel lblBarras = new JLabel("New label");
 	JProgressBar progressBar = new JProgressBar();
-	Timer timer = new Timer();
+	Timer timer = new Timer();// Aquí se pone en marcha el timer cada segundo.
 
 	
 	
@@ -71,37 +76,48 @@ public class Portada extends JFrame {
 		progressBar.setForeground(new Color(51, 0, 204));
 		progressBar.setBounds(30, 253, 474, 25);
 		contentPane.add(progressBar);
-		setLocationRelativeTo(null);
-		Carga();
-		Logo();
+		setLocationRelativeTo(null);//Se implementa este codigo para que la ventana de la interfaz se muestre en el centro
+		Carga();//Se implementa el metodo para la barra de carga
+		Logo();//Se implementa el metodo para mostrar la imagen de fondo
 	}
 	
+	//Metodo de carga
 	private void Carga() {
+		// Clase en la que está el código a ejecutar, esta instancia nos permite utilizar la clase java.util.Timer
 		TimerTask tarea = new TimerTask() {
-			 int x =0;
+			 int x =0;//Se utiliza una varibale de tipo entero como un contador que sea igual a cero
 
 			@Override
 			public void run() {
+				// Aquí el código que queremos ejecutar
 				
 				progressBar.setValue(x++);
-				
+				//Utilizamos una barra de progreso para que se vaya llenando
 				if(x ==100) {
+					//Se utiliza este condicional para que la variable x vaya aumentado desde cero a 100
+					//y que apenas llegue a 100 muestre la siguiente interfaz
 					ventana.setVisible(true);
 					dispose();
 				}
 			}
 			 
 		};
+		//Empieza en 0 ms y luego que se llena la barra cada 30 milisegundos
 		 timer.schedule(tarea, 0,30);
 	}
+	
+	//Metodo para agregar una imagen de fondo
 	private void Logo() {
-		
+		//La imagen está dentro del programa en una carpeta llamada recursos desde allí se trae esta imagen 
 		Image imagen = new ImageIcon(this.getClass().getResource("/Nombre.png"))
 				.getImage().getScaledInstance(lblNombreL.getWidth(), lblNombreL.getHeight(),Image.SCALE_DEFAULT);
-			lblNombreL.setIcon(new ImageIcon(imagen));
+			lblNombreL.setIcon(new ImageIcon(imagen));//Se setea para hacer visible la imagen seleccionada
+		//Con getScaledInstance(lblFondo.getWidth(),lblFondo.getHeight(),Image.SCALE_DEFAULT, se adapta al tamaño delLabel la imagen
 			
+		//La imagen está dentro del programa en una carpeta llamada recursos desde allí se trae esta imagen 	
 		Image imagen1 = new ImageIcon(this.getClass().getResource("/sonido.gif"))
 				.getImage().getScaledInstance(lblBarras.getWidth(), lblBarras.getHeight(),Image.SCALE_DEFAULT);
-			lblBarras.setIcon(new ImageIcon(imagen1));
+			lblBarras.setIcon(new ImageIcon(imagen1));//Se setea para hacer visible la imagen seleccionada
+		//Con getScaledInstance(lblFondo.getWidth(),lblFondo.getHeight(),Image.SCALE_DEFAULT, se adapta al tamaño delLabel la imagen
 	}
 }

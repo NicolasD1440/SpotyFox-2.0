@@ -4,11 +4,12 @@ import objeto.Canciones;
 
 public class Nodo {
 
-	private Canciones informacion;
+	private Canciones informacion;//Aqui se cambia por el objeto
+	// Variables para enlazar los nodos hacia delante y hacia atras.
 	private Nodo anterior;
 	private Nodo siguiente;
 	
-	
+	//Respectivos get y set de los atributos
 	public Canciones getInformacion() {
 		return informacion;
 	}

@@ -2,9 +2,12 @@ package objeto;
 
 public class CancionesFa {
 
+	//Se crean los atributos del objeto CancionesFa de tipo String
+	//Estos atributos van dirijidos a la lista simple
 	private String caratula, nombre, artista, cancion;
 	private String tiempo;
 
+	//Constructor que inicializamos el valor de las variables
 	public CancionesFa(String caratula, String nombre, String artista, String cancion, String tiempo) {
 			super();
 			this.caratula = caratula;
@@ -14,6 +17,7 @@ public class CancionesFa {
 			this.tiempo = tiempo;
 		}
 
+	//Métodos get y set para los atributos
 	public String getCaratula() {
 		return caratula;
 	}

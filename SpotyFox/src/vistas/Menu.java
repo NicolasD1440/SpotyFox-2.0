@@ -56,6 +56,8 @@ import java.awt.event.KeyEvent;
 
 public class Menu extends JFrame  {
 
+	//Se colocan las variables de los label contentpane, Texfield, JButton, Jslider, JProgressBar, Jlist, JScrollPane
+    //en la parte superior ya que serán utilizadas en los métodos dentro de la interfaz.
 	private JPanel contentPane;
 	JLabel lblPlay = new JLabel("<P>");
 	JLabel lblF1 = new JLabel("f");
@@ -83,7 +85,7 @@ public class Menu extends JFrame  {
 	private final JLabel lblTime = new JLabel("New label");
 	private final JLabel lblHome = new JLabel("New label");
 	private final JLabel lblLista = new JLabel("New label");
-	Lista_Simple mostrar = new Lista_Simple();
+	Lista_Simple mostrar = new Lista_Simple();//Se instancia la clase lista simple
     private final JLabel lblBasura = new JLabel("Borrar");
     private final JScrollPane scrollPane = new JScrollPane();
     private final JLabel lblF3 = new JLabel("f");
@@ -188,11 +190,16 @@ public class Menu extends JFrame  {
 		lblSiguienteC.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				
+		//Se coloca un condicional el cual dice que si el nodo siguiente es diferente de nullo, entonces que muestre los datos que están en la siguiente posición
 				if (nodo.getSiguiente() != null) {
+				//por medio del método implementado en lista circular de añadir elemento se implementa por medio de nodo para 
+				//que cumpla la función de una lista circular que el primero esté conectado con el ultimo	
 					nodo = nodo.getSiguiente();
-					Caratula();
-					mostrarDatos();
-					sd.Pausar();
+					
+					Caratula();//Muestra las imagenes de la cartula
+					mostrarDatos();//Mustra los datos de las canciones
+					sd.Pausar();//Pausa las canciones
 					timer.purge();	
 					progreso.setValue(0);
 				    progreso.repaint();
@@ -203,11 +210,16 @@ public class Menu extends JFrame  {
 		lblAnteriorC.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				
+			//Se coloca un condicional el cual dice que si el nodo anterior es diferente de nullo, entonces que muestre los datos que están en la anterior posición 
 				if (nodo.getAnterior() != null) {
+				//por medio del método implementado en lista circular de añadir elemento se implementa por medio de nodo para 
+				//que cumpla la función de una lista circular que el ultimo este conectado con el primero		
 					nodo = nodo.getAnterior();
-					Caratula();
-					mostrarDatos();
-					sd.Pausar();
+				
+					Caratula();//Muestra las imagenes de la cartula
+					mostrarDatos();//Mustra los datos de las canciones
+					sd.Pausar();//Pausa las canciones
 					timer.purge();	
 					progreso.setValue(0);
 				    progreso.repaint();
@@ -264,7 +276,7 @@ public class Menu extends JFrame  {
 		lblFavorita.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				//Este boton agrega los elementos a la lista de favoritos 
 				mostrar.addAbajo(new CancionesFa(nodo.getInformacion().getCaratula(),
 											 nodo.getInformacion().getNombre(),
 											 nodo.getInformacion().getArtista(),
@@ -278,13 +290,13 @@ public class Menu extends JFrame  {
 		lblCaratula.setDisplayedMnemonic(KeyEvent.VK_JAPANESE_ROMAN);
 		lblCaratula.setBorder(UIManager.getBorder("CheckBox.border"));
 		
-			lblCaratula.setHorizontalAlignment(SwingConstants.CENTER);
-			lblCaratula.setBounds(130, 40, 380, 240);
+		lblCaratula.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCaratula.setBounds(130, 40, 380, 240);
 			
-			Musica.add(lblCaratula);
+		Musica.add(lblCaratula);
 			
-			lblF1.setBounds(0, 0, 634, 312);
-			Musica.add(lblF1);
+		lblF1.setBounds(0, 0, 634, 312);
+		Musica.add(lblF1);
 		Lista.setBackground(new Color(51, 51, 51));
 		Lista.setBounds(0, 67, 634, 384);
 		
@@ -320,9 +332,12 @@ public class Menu extends JFrame  {
 		lblBasura.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				
+				//Este boton al presionarlo se elimina la canción seleccionada tanto del Jlist como de la lista Simple
 				mostrar.eliminarValor(list.getSelectedValue());	
 				mostrar.eliminardato(list);
-				sd.Pausar();
+				
+				sd.Pausar();//Se pausa la canción
 			}
 		});
 		lblBasura.setForeground(Color.WHITE);
@@ -346,14 +361,15 @@ public class Menu extends JFrame  {
 		lblLista.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				//Al presionar este boton lo dirige a la sesion de favoritos
 				lblTitulo.setText("Favoritas");
-				Musica.setVisible(false);
-				Lista.setVisible(true);
-				Reproductor.setVisible(false);
-				list.setModel(mostrar.mostrarDatos());
+				Musica.setVisible(false);//Se oculate este elemento
+				Lista.setVisible(true);//Se pone visible este elemento
+				Reproductor.setVisible(false);//Se oculate este elemento
+				list.setModel(mostrar.mostrarDatos());//Se muestran los elementos de la Lista
 				
-				sd.Parar();
-				timer.purge();	
+				sd.Parar();//Se para la canción si esta sonando al presionar este boton
+				timer.purge();//	
 				progreso.setValue(0);
 			    progreso.repaint();
 			    lblTime.setText(String.valueOf(nodo.getInformacion().getTiempo()));
@@ -365,10 +381,11 @@ public class Menu extends JFrame  {
 		lblHome.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				//Al presionar este boton se dirige a la sesion Home
 				lblTitulo.setText("Nuestra musica");
-				Musica.setVisible(true);
-				Lista.setVisible(false);
-				Reproductor.setVisible(true);
+				Musica.setVisible(true);//Se pone visible este elemento
+				Lista.setVisible(false);//Se oculate este elemento
+				Reproductor.setVisible(true);//Se pone visible este elemento
 			}
 		});
 		lblTitulo.setBounds(102, 0, 433, 64);
@@ -380,15 +397,16 @@ public class Menu extends JFrame  {
 		lblF3.setBounds(0, 0, 634, 85);
 		
 		panel.add(lblF3);
-		Caratula();
-		Botones();
-		mostrarDatos();
+		Caratula();//Se implementa el metodo para mostrar las imagenes de las caratulas
+		Fondos();//Se implementa el metodo para mostrar las imagenes de fondo y de los botones
+		mostrarDatos();//Se implementa el metodo para mostrar los datos del objeto
 		
-	   // incremento();
+	   
 
 	}
 	
-	private void Botones() {
+	//Metodo para las imagenes del programa
+	private void Fondos() {
 		
 		//imagenes de Menu
 		Image home = new ImageIcon(this.getClass().getResource("/homen.png"))
@@ -442,26 +460,27 @@ public class Menu extends JFrame  {
 			lblBasura.setIcon(new ImageIcon(Basura));
 	}
 	
+	//Metodo para mostrar las imagenes de la caratula de las canciones
 	public void Caratula() {
- 		
-		//imagenes de las caratula
-		  Image imagen = new ImageIcon(this.getClass().getResource(nodo.getInformacion().getCaratula()))
+ 	
+		  Image imagen = new ImageIcon(this.getClass().getResource(nodo.getInformacion().getCaratula()))//Imagen de la caratula
 		  .getImage().getScaledInstance(lblCaratula.getWidth(), lblCaratula.getHeight(),Image.SCALE_DEFAULT);
 		  lblCaratula.setIcon(new ImageIcon(imagen));
+	   //Con getScaledInstance(lblFondo.getWidth(),lblFondo.getHeight(),Image.SCALE_DEFAULT, se adapta al tamaño delLabel la imagen	  
 	 }
   
+	//Metodo para mostrar los datos de las canciones
     public void mostrarDatos() {
  	
-    	//datos de las canciones
  	      lblNombre.setText(nodo.getInformacion().getNombre());//nombre de la cancion
  	      lblAutor.setText(nodo.getInformacion().getArtista());//Cantante
- 	     lblTime.setText(String.valueOf(nodo.getInformacion().getTiempo()));//tiempo de la cancion
+ 	      lblTime.setText(String.valueOf(nodo.getInformacion().getTiempo()));//tiempo de la cancion
  	     
    }
   
     public void incremento(String a) {
     	String[] parts = a.split(":");
-		//int[] b = new int[2];
+		
 		int fr = Integer.parseInt(parts[0]);
 		int ft = Integer.parseInt(parts[1]);
 		
@@ -482,14 +501,9 @@ public class Menu extends JFrame  {
 					
 					cancel();
 				}
-				
-				
-				
-			}
-			 
+			} 
 		};
 		 timer.schedule(tarea, 0,1000);
-    
     }
   
     public  void  temporizador(String a){
@@ -508,7 +522,7 @@ public class Menu extends JFrame  {
             int minutos;
 			@Override
 			public void run() {
-				//while(minutos!=b[0] && segundos!=b[1]) 
+				 
 				if(minutos < b[0]  && sd.Estado()==0|| segundos< b[1] && sd.Estado()==0 ) {
 					segundos++;
 					if(segundos > 59) {
@@ -516,13 +530,11 @@ public class Menu extends JFrame  {
 						minutos++;
 					}
 					lblTime.setText(String.valueOf(minutos + ":" + segundos));
-					//System.out.println(minutos + ":" + segundos);
+					
 					
 				}else {
 					cancel();
 				}
-				
-				
 		}
 		
 		};

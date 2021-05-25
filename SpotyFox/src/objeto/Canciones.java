@@ -2,10 +2,12 @@ package objeto;
 
 public class Canciones {
 	
-		
+	//Se crean los atributos del objeto Canciones de tipo String
+	//Estos atributos van dirijidos a la lista circular
 	private String caratula, nombre, artista, cancion;
 	private String tiempo;
 
+	//Constructor que inicializamos el valor de las variables
 	public Canciones(String caratula, String nombre, String artista, String cancion, String tiempo) {
 			super();
 			this.caratula = caratula;
@@ -14,7 +16,8 @@ public class Canciones {
 			this.cancion = cancion;
 			this.tiempo = tiempo;
 		}
-
+	
+	//Métodos get y set para los atributos
 	public String getCaratula() {
 		return caratula;
 	}
