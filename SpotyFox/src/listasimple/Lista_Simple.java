@@ -9,7 +9,6 @@ import objeto.CancionesFa;
 
 public class Lista_Simple {
 	
-	
 	private Nodo1 primero; //Acceder al primer nodo de la lista
 	private int size;//Tamaño de la lista
 	
@@ -65,24 +64,24 @@ public class Lista_Simple {
 	}
 	
 	//Eliminar por valor
-		public void eliminarValor(String v) {
+		public void eliminarValor(String v) {//se pide un valor de tipo String
 			
 			
-			Nodo1 var = primero;
+			Nodo1 var = primero; //tenemos 2 variables de tipo nodo 
 			Nodo1 ant = null;
 						
-			for(int i = 0; i < size; i++) {
+			for(int i = 0; i < size; i++) { // este ciclo recorre la lista simple
 				
-				if(v.equals(var.getInformacion().getNombre())) {
+				if(v.equals(var.getInformacion().getNombre())) { //si el valor que se pasa se encuentra en la lista
 					
-					ant.setRef(var.getRef());
-					
+					ant.setRef(var.getRef());					// se reemplaza la referencia anterior por la siguiente
+																//eliminando el nodo que coincide
 															
 				}
 				else {
 					
 					ant = var;
-					var = var.getRef();
+					var = var.getRef();					//si no equivale sigue aumentando la posicion del nodo
 				}
 			}
 			this.size--;
@@ -126,32 +125,32 @@ public class Lista_Simple {
 	
 	  
 	
-	public String Buscar (String a) {
+	public String Buscar (String a) { // se pide un valor de tipo String (el nombre de la cancion)
 		Nodo1 var = primero;
 
-		for(int i = 0; i < size; i++) {
-			if(a.equals(var.getInformacion().getNombre())) {
-				return var.getInformacion().getCancion();
+		for(int i = 0; i < size; i++) { // este ciclo es para recorrer la lista simple
+			if(a.equals(var.getInformacion().getNombre())) { //si existe el nodo 
+				return var.getInformacion().getCancion();	// nos retorna la direccion de la cancion
 			}else {
 				
-				var = var.getRef();
+				var = var.getRef(); //si no aumenta la posicion
 			}
 		}
 
 		return "NO HAY CANCIONES";
 	}
 	
-	public boolean verificar(CancionesFa v) {
+	public boolean verificar(CancionesFa v) { // se pide un valos tipo String
 		  
 		  Nodo1 var = primero;
-		  boolean verif = false;
+		  boolean verif = false; //esta es la variable de retorno empieza en falso
 			
-			for (int i = 0; i < size; i++) {
+			for (int i = 0; i < size; i++) { //este ciclo recorre la lista simple
 		
-				if(v.getNombre().equals(var.getInformacion().getNombre())) {
-					verif = true;
+				if(v.getNombre().equals(var.getInformacion().getNombre())) { // si el valor existe cambia el estado de
+					verif = true;											// la variable de retorno a verdadero
 				}else {
-					var = var.getRef();
+					var = var.getRef(); // si no aumenta la posicion
 				}
 			}
 			return verif;
