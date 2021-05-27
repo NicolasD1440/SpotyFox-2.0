@@ -16,7 +16,6 @@ public class Inicio {
 	public static Lista_Circular metod = new Lista_Circular();
 	//Se instancia la clase Lista_Circular donde se utilizan el método de agregar el elemento.
 
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		  
